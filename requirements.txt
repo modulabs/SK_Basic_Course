@@ -1,0 +1,9 @@
+flask-bootstrap
+flask_script
+flask_migrate
+flask_assets
+flask_bcrypt
+flask_cache
+flask_debugtoolbar
+flask_login
+cookiecutter
