@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>(주)모두의연구소 AI 온라인 튜토리얼</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="css/notion-style.css" rel="stylesheet">
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" src="include_html.js"></script>
+  <script type="text/javascript">
+  function leftCompleted() {
+   $("#left-sidebar").html();
+  }
+  function topCompleted() {
+   $("#right-topbar").html();
+  }
+  </script>
+
+  <script src="http://www.skulpt.org/js/skulpt.min.js" type="text/javascript"></script>
+  <script src="http://www.skulpt.org/js/skulpt-stdlib.js" type="text/javascript"></script>
+
+</head>
+
+<body id="page-top">
+<script type="text/javascript">
+// output functions are configurable.  This one just appends some text
+// to a pre element.
+function outf(text) {
+    var mypre = document.getElementById("output");
+    mypre.innerHTML = mypre.innerHTML + text;
+}
+function builtinRead(x) {
+    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+            throw "File not found: '" + x + "'";
+    return Sk.builtinFiles["files"][x];
+}
+// Here's everything you need to run a python program in skulpt
+// grab the code from your textarea
+// get a reference to your pre element for output
+// configure the output function
+// call Sk.importMainWithBody()
+function runit() {
+   var prog = document.getElementById("yourcode").value;
+   var mypre = document.getElementById("output");
+   mypre.innerHTML = '';
+   Sk.pre = "output";
+   Sk.configure({output:outf, read:builtinRead});
+   (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'mycanvas';
+   var myPromise = Sk.misceval.asyncToPromise(function() {
+       return Sk.importMainWithBody("<stdin>", false, prog, true);
+   });
+   myPromise.then(function(mod) {
+       console.log('success');
+   },
+       function(err) {
+       console.log(err.toString());
+   });
+}
+</script>
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <include-html target="left.html" completed="leftCompleted"></include-html>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <include-html target="topbar.html" completed="topCompleted"></include-html>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+<article id="20e7852c-2244-47b3-a5c7-5f788caac879" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📝</span></div><h1 class="page-title">Lecture 1. 차원</h1></header><div class="page-body"><p id="3297af83-fb0c-4b50-8e9b-7bbacf75b122" class="">
+</p><h2 id="535c59e6-1048-4d7a-9e07-3cb4ba455b21" class="">3차원과 2차원</h2><hr id="a09b67f2-e21b-45d3-8baa-cfdde1f25637"/><p id="858ba018-fcf2-4e82-99c7-84406d800f55" class="">아이들이 가지고 노는 인형을 생각해 봅시다. 3차원 공간에서의 인형은 아래 그림의 바비인형과 같이 오똑한 코, 찰랑 거리는 머리카락, 앞뒤로 움직이는 팔과 다리를 가지고 있습니다. 하지만 2차원 공간에서의 인형은 평면에서만 표현되는 종이 인형과 같은 형태가 됩니다. </p><figure id="6122e1bc-c57f-4573-b232-5c28879ba7ef" class="image"><a href="img/lec01-01-01.png"><img style="width:773px" src="img/lec01-01-01.png"/></a></figure><h2 id="e6fff754-5af3-4e46-a028-009a2bed1213" class="">차원과 숫자 그리고 벡터</h2><hr id="0910bac5-0d31-4de0-82b4-ea4a07e91f56"/><div id="e4236c28-49d8-4f3a-838a-7cfc14cd1edf" class="column-list"><div id="5e03275d-5814-41a2-9fa3-62b35dac12e2" style="width:50%" class="column"><p id="2a3f763d-ef97-4a85-80fa-bd1b981274a4" class="">우리가 사는 세상을 3차원이라고 많이들 이야기 합니다. 입체감을 느낄 수 있는 우리가 사는 공간을 (x, y, z)와 같은 세 개의 축으로 정의할 수 있기 때문입니다. </p><p id="8bf72eec-853e-417a-9b8b-d452ae5cc256" class="">반면 스케치북 위에 그린 그림은 평면위에 표현되기에, 2차원이라고 부릅니다. 2차원 공간은 (x, y) 처럼 2개의 숫자로 표현할 수 있습니다. </p><p id="7d1594fc-5044-413f-97af-e784b0b5046b" class="">그렇다면 1차원을 표현하기 위해서는 하나의 숫자만 있어도 되겠지요. </p></div><div id="de9c80b1-0183-48b0-8330-3aa1c6ec9efb" style="width:50%" class="column"><figure id="1dab6aa9-072d-4b47-8fcf-2f4d4d93bad5" class="image"><a href="img/lec01-01-02.png"><img style="width:288px" src="img/lec01-01-02.png"/></a></figure></div></div><p id="dacbf8a3-aedb-417a-85aa-3ffdbb49f807" class="">2차원을 나타내는 (x, y), 3차원을 나타내는 (x, y, z) 같은 숫자 모음을 우리는 <strong>벡터</strong><em>Vector</em> 라고 부릅니다. 우리가 상상하기는 힘들겠지만, 이 벡터라는 것을 이용하면 손쉽게 다차원 공간의 점을 표현할 수 있습니다. </p><blockquote id="4a9ffae4-2995-419e-87f7-a064afd08c9f" class="">2차원 벡터의 예 = (1, 2)</blockquote><blockquote id="294b9d0b-6fe0-4af9-b261-e3fd6d717c1b" class="">3차원 벡터의 예 = (1, 2, 1)</blockquote><blockquote id="2a5897f4-6ad3-49b1-9fca-4c84e6cb3eaf" class="">10차원 벡터의 예 = (1, 2, 1, 0, 3, 4, 2, 1, 10, 3)</blockquote><p id="26739dab-7a5c-467a-b416-e61151595015" class="">
+</p><p id="1df26308-9f2f-43d1-b639-2a6c33329720" class="">
+</p><h2 id="93b275d6-6f1a-4744-9c66-6443f42df4b8" class="">Programming 실습</h2><hr id="40bbbcee-81aa-4dfb-b608-658047b250d5"/><p id="18ae19cd-8908-4c21-b873-8d3a71f4807d" class="">
+</p><h3 id="93ca19d1-ec06-49c2-a896-402b2e80b3ea" class="">파이썬 첫 만남 : console 등 설명</h3><p id="8e9fe24c-b689-4964-a45e-13472658de32" class="">
+</p><h3 id="70a43d50-248d-4566-b9ec-f3ba0b82a7bf" class="">화면 출력하기 : print</h3><p id="d0408a94-3bb6-44a0-908b-6b744c800266" class="">
+</p><h3 id="f27e8aae-4984-4b4c-9163-37fae0674c06" class="">문자열 : str</h3><p id="f9a70a34-2ad6-4362-92e9-7e47db7a0983" class="">
+</p><h3 id="df186f25-0296-49b3-b2f5-f2fd72c5f721" class="">숫자 : 정수와 실수 : int, float</h3><p id="f927de53-12aa-4a97-9dd2-e9bc10ddcd41" class="">
+</p><h3 id="3bed7cc5-0388-4b14-a0c4-2c21746d0236" class="">문자와 숫자 입력받기 : input</h3><p id="b8447744-839f-48f0-9465-b7fa35959058" class="">
+</p><h3 id="870c83d6-b59c-4cf3-ae5b-291cc12da271" class="">벡터를 표현해보자 : list</h3><p id="e0a173e8-af4c-49e5-a5f3-a91606578e39" class="">
+</p><p id="0c472ed2-0c62-469a-a44c-2896fff947f6" class="">
+</p><h2 id="08fb39bf-9885-4704-b442-d9accc664443" class="">미니프로젝트 : 내가 읽은 책 표시하기</h2><hr id="eaab4944-0adf-4ba8-8d2c-257342a9b312"/><p id="e0eb6c88-3ecd-46f5-a90d-15aa83f84af9" class="">여러분들은 이제 사용자에게 알맞은 도서를 추천해주는 알고리즘을 개발하게 될 것 입니다. 먼저 books 라는 리스트를 만들고, &#x27;삼국지&#x27;, &#x27;코스모스&#x27;, &#x27;사피엔스&#x27; 라는 3권의 책을 books라는 리스트에 넣어 보겠습니다. </p><pre id="2eac37d1-a174-44c1-bea7-3a80f7f52a88" class="code"><code>books = [&#x27;코스모스&#x27;, &#x27;삼국지&#x27;, &#x27;사피엔스&#x27;]</code></pre><p id="af0e697b-976c-424e-a91d-91649fc50f0c" class="">여러분은 그 중에서 &#x27;삼국지&#x27; 와 &#x27;사피엔스&#x27; 라는 책은 구매해서 읽었지만, &#x27;코스모스&#x27;는 읽지 않았다고 생각해보죠. 읽었는지 읽지 않았는지 표현해주는 mylist 라는 새로운 리스트를 만들어 보겠습니다.</p><pre id="f8987a22-1d9a-482b-83a1-40ffbb482335" class="code"><code>mylist=[0, 1, 1]</code></pre><p id="5d6a14a7-0e4e-42c7-8f28-a9912ee27d52" class="">그러면 여러분이 읽은 책만 출력하는 프로그램을 만드려면 어떻게 하면 될까요? 먼저 여러분이 &#x27;코스모스&#x27; 라는 책을 읽었는지 알아보죠. &#x27;코스모스&#x27;는 books 리스트의 첫번째 항목입니다. 다음과 같이 코드를 입력하고 실행해봅시다. </p><pre id="489c5de2-e172-4f66-8828-8e1bfed405d3" class="code"><code>print(books[0])</code></pre><p id="f42c2e0b-113a-4814-acd7-edd997e65bac" class="">그러면 &#x27;코스모스&#x27; 가 출력되는 것을 알 수 있습니다. (대부분의 프로그램에서 첫번째 항목이라는 것을 0번째로 표현합니다. 여기서도 books[1]이 첫번째 항목이 아니고, books[0]이 첫번째 항목임에 주의하세요.)</p><figure id="5ec6b90a-9af4-44cc-a2ba-910d8f73e7ef" class="image"><a href="Lecture 1/Untitled 2.png"><img style="width:576px" src="Lecture 1/Untitled 2.png"/></a></figure><p id="e34b9518-a8c2-4879-baf2-aa0870809e0f" class="">하지만, 사실 &#x27;코스모스&#x27; 라는 책은 읽지 않았습니다. 그 정보는 mylist[0] 을 보면 알 수 있죠. mylist[0] 의 값이 1이면 책을 읽은 것이고, 0이라면 책을 읽지 않은 것입니다. 자, 이렇게 한번 코드를 입력하고 실행해 봅시다. </p><pre id="327954f3-2fa4-49bc-810e-2181633c35d5" class="code"><code>print(books[0]*mylist[0])</code></pre><p id="198ddfef-ed47-43d1-a2dc-fa16ad685ca6" class="">앗, 아무것도 출력되지 않네요?!! 여러분이 읽지 않은 책인가 봅니다. </p><figure id="e0b8c65a-cc19-4869-acb3-4b18e80d211b" class="image"><a href="Lecture 1/Untitled 3.png"><img style="width:576px" src="Lecture 1/Untitled 3.png"/></a></figure><p id="8c0323d1-4e97-4239-a51a-d0c232bb1461" class="">그러면 이번에는 &#x27;삼국지&#x27;라는 책을 읽었는지 확인해볼까요? </p><pre id="047dc2db-71bd-4caf-9556-1642c390f66b" class="code"><code>print(books[1]*mylist[1])</code></pre><figure id="114c61ed-b472-40be-be24-10f7abc1da64" class="image"><a href="Lecture 1/Untitled 4.png"><img style="width:576px" src="Lecture 1/Untitled 4.png"/></a></figure><p id="5d98c6c8-ee61-453d-8084-294740305871" class="">&#x27;삼국지&#x27;는 출력이 되는 걸 보니, 여러분이 읽은 책이군요!!!</p><p id="657caa8e-1589-4321-a9b8-0fd6533d27c8" class="">자, 마지막으로 &#x27;사피엔스&#x27; 책을 읽었는지도 살펴봅시다. </p><pre id="3f140de8-d0ea-4ddd-8e31-86f442391692" class="code"><code>print(books[2]*mylist[2])</code></pre><p id="fef9e448-7ce0-419a-9f70-58e807de0def" class="">잘 출력이 되는 걸 보니, 읽은 책이 맞군요.</p><figure id="0a505d55-1d51-4f10-a4b6-1c1c3565efcb" class="image"><a href="Lecture 1/Untitled 5.png"><img style="width:576px" src="Lecture 1/Untitled 5.png"/></a></figure><p id="e3376c69-bdab-4093-8aae-df928e0c47de" class="">자, 지금까지 내가 읽은 책들을 출력하는 프로그램을 만들어 보았습니다. 그 순서는 다음과 같습니다.</p><p id="04549503-569a-4089-89c8-1eb6cb744e80" class="">(1) &#x27;books라는 책제목 리스트에 코스모스&#x27;, &#x27;삼국지&#x27;, &#x27;사피엔스&#x27; 책을 넣는다.</p><p id="d0feb721-c727-407e-8d38-a357fac77756" class="">(2) 그 중에 내가 읽은 책인 &#x27;삼국지&#x27;와 &#x27;사피엔스&#x27;는 1로 표시, 읽지 않은 &#x27;코스모스&#x27;는 0으로 표시하는 mylist 라는 리스트를 만든다.</p><p id="d5a07300-2866-406b-8d6c-33b483f13e2f" class="">(3) 내가 읽은 책들을 출력한다.</p><p id="e638233b-ef7a-4e47-a558-44dbc4def141" class="">이에 대한 전체 코드는 다음과 같습니다.</p><pre id="0d50af40-7a8b-4cca-b677-882064c91b4d" class="code"><code># 책제목 리스트 books 만들기
+books = [&#x27;코스모스&#x27;, &#x27;삼국지&#x27;, &#x27;사피엔스&#x27;]
+
+# 내가 읽은 책 mylist에 표시하기
+mylist=[0, 1, 1]
+
+# 내가 읽은 책 출력하기
+print(books[0]*mylist[0])
+print(books[1]*mylist[1])
+print(books[2]*mylist[2])
+</code></pre><p id="bcce8d22-0fe9-4769-aac9-dc57b0cc5e73" class="">
+</p><p id="f2631990-dfc1-4e38-b34c-87aab104c6f2" class="">이 내용을 바탕으로 다음의 문제를 풀어봅시다.</p><p id="60955cd5-001b-4fe1-b82a-8938a92f3974" class="">(1) 10권의 책을 books 에 넣습니다. 책 제목들은 다음과 같습니다. </p><p id="4e3bd753-b039-40ad-8f3f-dde42fb7d5f4" class="">&#x27;코스모스&#x27;, &#x27;삼국지&#x27;, &#x27;사피엔스&#x27;, &#x27;어린왕자&#x27;, &#x27;소나기&#x27;, &#x27;총균쇠&#x27;, &#x27;함께자라기&#x27;,&#x27;초격차&#x27;,&#x27;호모데우스&#x27;,&#x27;파워풀&#x27;</p><p id="59b0001c-3517-42ff-855a-957914621ee6" class="">(2) 그 중 내가 읽은 책을 mylist에 표시합니다.</p><p id="1666b219-4951-4b78-a65f-bd33891d5b81" class="">&#x27;삼국지&#x27;, &#x27;사피엔스&#x27;, &#x27;함께자라기&#x27;, &#x27;호모데우스&#x27;, &#x27;파워풀&#x27;</p><p id="36aef5a9-c590-4ccd-8697-6b2ebcacbb79" class="">(3) 내가 읽은 책들을 출력합니다.</p><pre id="0068d3c2-b46b-4dbd-82b8-c02fb3faa37c" class="code"><code>books=[&#x27;코스모스&#x27;,&#x27;삼국지&#x27;,&#x27;사피엔스&#x27;,&#x27;어린왕자&#x27;,&#x27;소나기&#x27;,&#x27;총균쇠&#x27;,&#x27;함께자라기&#x27;,&#x27;초격차&#x27;,&#x27;호모데우스&#x27;,&#x27;파워풀&#x27;]
+
+...</code></pre><p id="518a2279-abd9-44a8-8fda-77baebaeee11" class="">
+</p><p id="e1b65901-917e-446f-bc01-7e599c1b35e5" class="">
+</p></div></article>
+
+        </div>
+
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; 모두의연구소 2019</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/chart-area-demo.js"></script>
+  <script src="js/demo/chart-pie-demo.js"></script>
+
+  <script>includeHtml();</script>
+
+
+</body>
+
+</html>
