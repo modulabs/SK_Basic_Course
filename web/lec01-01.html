@@ -36,41 +36,7 @@
 </head>
 
 <body id="page-top">
-<script type="text/javascript">
-// output functions are configurable.  This one just appends some text
-// to a pre element.
-function outf(text) {
-    var mypre = document.getElementById("output");
-    mypre.innerHTML = mypre.innerHTML + text;
-}
-function builtinRead(x) {
-    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
-            throw "File not found: '" + x + "'";
-    return Sk.builtinFiles["files"][x];
-}
-// Here's everything you need to run a python program in skulpt
-// grab the code from your textarea
-// get a reference to your pre element for output
-// configure the output function
-// call Sk.importMainWithBody()
-function runit() {
-   var prog = document.getElementById("yourcode").value;
-   var mypre = document.getElementById("output");
-   mypre.innerHTML = '';
-   Sk.pre = "output";
-   Sk.configure({output:outf, read:builtinRead});
-   (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'mycanvas';
-   var myPromise = Sk.misceval.asyncToPromise(function() {
-       return Sk.importMainWithBody("<stdin>", false, prog, true);
-   });
-   myPromise.then(function(mod) {
-       console.log('success');
-   },
-       function(err) {
-       console.log(err.toString());
-   });
-}
-</script>
+  <script type="text/javascript" src="skulpt.js"></script>
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -92,19 +58,308 @@ function runit() {
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-<article id="20e7852c-2244-47b3-a5c7-5f788caac879" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📝</span></div><h1 class="page-title">Lecture 1. 차원</h1></header><div class="page-body"><p id="3297af83-fb0c-4b50-8e9b-7bbacf75b122" class="">
-</p><h2 id="535c59e6-1048-4d7a-9e07-3cb4ba455b21" class="">3차원과 2차원</h2><hr id="a09b67f2-e21b-45d3-8baa-cfdde1f25637"/><p id="858ba018-fcf2-4e82-99c7-84406d800f55" class="">아이들이 가지고 노는 인형을 생각해 봅시다. 3차원 공간에서의 인형은 아래 그림의 바비인형과 같이 오똑한 코, 찰랑 거리는 머리카락, 앞뒤로 움직이는 팔과 다리를 가지고 있습니다. 하지만 2차원 공간에서의 인형은 평면에서만 표현되는 종이 인형과 같은 형태가 됩니다. </p><figure id="6122e1bc-c57f-4573-b232-5c28879ba7ef" class="image"><a href="img/lec01-01-01.png"><img style="width:773px" src="img/lec01-01-01.png"/></a></figure><h2 id="e6fff754-5af3-4e46-a028-009a2bed1213" class="">차원과 숫자 그리고 벡터</h2><hr id="0910bac5-0d31-4de0-82b4-ea4a07e91f56"/><div id="e4236c28-49d8-4f3a-838a-7cfc14cd1edf" class="column-list"><div id="5e03275d-5814-41a2-9fa3-62b35dac12e2" style="width:50%" class="column"><p id="2a3f763d-ef97-4a85-80fa-bd1b981274a4" class="">우리가 사는 세상을 3차원이라고 많이들 이야기 합니다. 입체감을 느낄 수 있는 우리가 사는 공간을 (x, y, z)와 같은 세 개의 축으로 정의할 수 있기 때문입니다. </p><p id="8bf72eec-853e-417a-9b8b-d452ae5cc256" class="">반면 스케치북 위에 그린 그림은 평면위에 표현되기에, 2차원이라고 부릅니다. 2차원 공간은 (x, y) 처럼 2개의 숫자로 표현할 수 있습니다. </p><p id="7d1594fc-5044-413f-97af-e784b0b5046b" class="">그렇다면 1차원을 표현하기 위해서는 하나의 숫자만 있어도 되겠지요. </p></div><div id="de9c80b1-0183-48b0-8330-3aa1c6ec9efb" style="width:50%" class="column"><figure id="1dab6aa9-072d-4b47-8fcf-2f4d4d93bad5" class="image"><a href="img/lec01-01-02.png"><img style="width:288px" src="img/lec01-01-02.png"/></a></figure></div></div><p id="dacbf8a3-aedb-417a-85aa-3ffdbb49f807" class="">2차원을 나타내는 (x, y), 3차원을 나타내는 (x, y, z) 같은 숫자 모음을 우리는 <strong>벡터</strong><em>Vector</em> 라고 부릅니다. 우리가 상상하기는 힘들겠지만, 이 벡터라는 것을 이용하면 손쉽게 다차원 공간의 점을 표현할 수 있습니다. </p><blockquote id="4a9ffae4-2995-419e-87f7-a064afd08c9f" class="">2차원 벡터의 예 = (1, 2)</blockquote><blockquote id="294b9d0b-6fe0-4af9-b261-e3fd6d717c1b" class="">3차원 벡터의 예 = (1, 2, 1)</blockquote><blockquote id="2a5897f4-6ad3-49b1-9fca-4c84e6cb3eaf" class="">10차원 벡터의 예 = (1, 2, 1, 0, 3, 4, 2, 1, 10, 3)</blockquote><p id="26739dab-7a5c-467a-b416-e61151595015" class="">
-</p><p id="1df26308-9f2f-43d1-b639-2a6c33329720" class="">
-</p><h2 id="93b275d6-6f1a-4744-9c66-6443f42df4b8" class="">Programming 실습</h2><hr id="40bbbcee-81aa-4dfb-b608-658047b250d5"/><p id="18ae19cd-8908-4c21-b873-8d3a71f4807d" class="">
-</p><h3 id="93ca19d1-ec06-49c2-a896-402b2e80b3ea" class="">파이썬 첫 만남 : console 등 설명</h3><p id="8e9fe24c-b689-4964-a45e-13472658de32" class="">
-</p><h3 id="70a43d50-248d-4566-b9ec-f3ba0b82a7bf" class="">화면 출력하기 : print</h3><p id="d0408a94-3bb6-44a0-908b-6b744c800266" class="">
-</p><h3 id="f27e8aae-4984-4b4c-9163-37fae0674c06" class="">문자열 : str</h3><p id="f9a70a34-2ad6-4362-92e9-7e47db7a0983" class="">
-</p><h3 id="df186f25-0296-49b3-b2f5-f2fd72c5f721" class="">숫자 : 정수와 실수 : int, float</h3><p id="f927de53-12aa-4a97-9dd2-e9bc10ddcd41" class="">
-</p><h3 id="3bed7cc5-0388-4b14-a0c4-2c21746d0236" class="">문자와 숫자 입력받기 : input</h3><p id="b8447744-839f-48f0-9465-b7fa35959058" class="">
-</p><h3 id="870c83d6-b59c-4cf3-ae5b-291cc12da271" class="">벡터를 표현해보자 : list</h3><p id="e0a173e8-af4c-49e5-a5f3-a91606578e39" class="">
-</p><p id="0c472ed2-0c62-469a-a44c-2896fff947f6" class="">
-</p><h2 id="08fb39bf-9885-4704-b442-d9accc664443" class="">미니프로젝트 : 내가 읽은 책 표시하기</h2><hr id="eaab4944-0adf-4ba8-8d2c-257342a9b312"/><p id="e0eb6c88-3ecd-46f5-a90d-15aa83f84af9" class="">여러분들은 이제 사용자에게 알맞은 도서를 추천해주는 알고리즘을 개발하게 될 것 입니다. 먼저 books 라는 리스트를 만들고, &#x27;삼국지&#x27;, &#x27;코스모스&#x27;, &#x27;사피엔스&#x27; 라는 3권의 책을 books라는 리스트에 넣어 보겠습니다. </p><pre id="2eac37d1-a174-44c1-bea7-3a80f7f52a88" class="code"><code>books = [&#x27;코스모스&#x27;, &#x27;삼국지&#x27;, &#x27;사피엔스&#x27;]</code></pre><p id="af0e697b-976c-424e-a91d-91649fc50f0c" class="">여러분은 그 중에서 &#x27;삼국지&#x27; 와 &#x27;사피엔스&#x27; 라는 책은 구매해서 읽었지만, &#x27;코스모스&#x27;는 읽지 않았다고 생각해보죠. 읽었는지 읽지 않았는지 표현해주는 mylist 라는 새로운 리스트를 만들어 보겠습니다.</p><pre id="f8987a22-1d9a-482b-83a1-40ffbb482335" class="code"><code>mylist=[0, 1, 1]</code></pre><p id="5d6a14a7-0e4e-42c7-8f28-a9912ee27d52" class="">그러면 여러분이 읽은 책만 출력하는 프로그램을 만드려면 어떻게 하면 될까요? 먼저 여러분이 &#x27;코스모스&#x27; 라는 책을 읽었는지 알아보죠. &#x27;코스모스&#x27;는 books 리스트의 첫번째 항목입니다. 다음과 같이 코드를 입력하고 실행해봅시다. </p><pre id="489c5de2-e172-4f66-8828-8e1bfed405d3" class="code"><code>print(books[0])</code></pre><p id="f42c2e0b-113a-4814-acd7-edd997e65bac" class="">그러면 &#x27;코스모스&#x27; 가 출력되는 것을 알 수 있습니다. (대부분의 프로그램에서 첫번째 항목이라는 것을 0번째로 표현합니다. 여기서도 books[1]이 첫번째 항목이 아니고, books[0]이 첫번째 항목임에 주의하세요.)</p><figure id="5ec6b90a-9af4-44cc-a2ba-910d8f73e7ef" class="image"><a href="Lecture 1/Untitled 2.png"><img style="width:576px" src="Lecture 1/Untitled 2.png"/></a></figure><p id="e34b9518-a8c2-4879-baf2-aa0870809e0f" class="">하지만, 사실 &#x27;코스모스&#x27; 라는 책은 읽지 않았습니다. 그 정보는 mylist[0] 을 보면 알 수 있죠. mylist[0] 의 값이 1이면 책을 읽은 것이고, 0이라면 책을 읽지 않은 것입니다. 자, 이렇게 한번 코드를 입력하고 실행해 봅시다. </p><pre id="327954f3-2fa4-49bc-810e-2181633c35d5" class="code"><code>print(books[0]*mylist[0])</code></pre><p id="198ddfef-ed47-43d1-a2dc-fa16ad685ca6" class="">앗, 아무것도 출력되지 않네요?!! 여러분이 읽지 않은 책인가 봅니다. </p><figure id="e0b8c65a-cc19-4869-acb3-4b18e80d211b" class="image"><a href="Lecture 1/Untitled 3.png"><img style="width:576px" src="Lecture 1/Untitled 3.png"/></a></figure><p id="8c0323d1-4e97-4239-a51a-d0c232bb1461" class="">그러면 이번에는 &#x27;삼국지&#x27;라는 책을 읽었는지 확인해볼까요? </p><pre id="047dc2db-71bd-4caf-9556-1642c390f66b" class="code"><code>print(books[1]*mylist[1])</code></pre><figure id="114c61ed-b472-40be-be24-10f7abc1da64" class="image"><a href="Lecture 1/Untitled 4.png"><img style="width:576px" src="Lecture 1/Untitled 4.png"/></a></figure><p id="5d98c6c8-ee61-453d-8084-294740305871" class="">&#x27;삼국지&#x27;는 출력이 되는 걸 보니, 여러분이 읽은 책이군요!!!</p><p id="657caa8e-1589-4321-a9b8-0fd6533d27c8" class="">자, 마지막으로 &#x27;사피엔스&#x27; 책을 읽었는지도 살펴봅시다. </p><pre id="3f140de8-d0ea-4ddd-8e31-86f442391692" class="code"><code>print(books[2]*mylist[2])</code></pre><p id="fef9e448-7ce0-419a-9f70-58e807de0def" class="">잘 출력이 되는 걸 보니, 읽은 책이 맞군요.</p><figure id="0a505d55-1d51-4f10-a4b6-1c1c3565efcb" class="image"><a href="Lecture 1/Untitled 5.png"><img style="width:576px" src="Lecture 1/Untitled 5.png"/></a></figure><p id="e3376c69-bdab-4093-8aae-df928e0c47de" class="">자, 지금까지 내가 읽은 책들을 출력하는 프로그램을 만들어 보았습니다. 그 순서는 다음과 같습니다.</p><p id="04549503-569a-4089-89c8-1eb6cb744e80" class="">(1) &#x27;books라는 책제목 리스트에 코스모스&#x27;, &#x27;삼국지&#x27;, &#x27;사피엔스&#x27; 책을 넣는다.</p><p id="d0feb721-c727-407e-8d38-a357fac77756" class="">(2) 그 중에 내가 읽은 책인 &#x27;삼국지&#x27;와 &#x27;사피엔스&#x27;는 1로 표시, 읽지 않은 &#x27;코스모스&#x27;는 0으로 표시하는 mylist 라는 리스트를 만든다.</p><p id="d5a07300-2866-406b-8d6c-33b483f13e2f" class="">(3) 내가 읽은 책들을 출력한다.</p><p id="e638233b-ef7a-4e47-a558-44dbc4def141" class="">이에 대한 전체 코드는 다음과 같습니다.</p><pre id="0d50af40-7a8b-4cca-b677-882064c91b4d" class="code"><code># 책제목 리스트 books 만들기
-books = [&#x27;코스모스&#x27;, &#x27;삼국지&#x27;, &#x27;사피엔스&#x27;]
+<article id="20e7852c-2244-47b3-a5c7-5f788caac879" class="page sans">
+  <header>
+    <div class="page-header-icon undefined">
+    <span class="icon">📝</span>
+    </div><h1 class="page-title">Lecture 1. 차원</h1></header>
+  <div class="page-body">
+    <p id="3297af83-fb0c-4b50-8e9b-7bbacf75b122" class=""></p>
+
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="225cc3ed-ddd0-48f7-87ea-7ef76c56c7eb" class="">들어가며) 데이터와 추천시스템</h2>
+    <hr id="0a39d3aa-6db6-46fa-8942-52baaf58aee5"/>
+    <p id="bf998969-e6ed-47fb-9a47-3756127d3ca5" class="">안녕하세요. 반갑습니다. 우리는 5개의 Lecture를 통해 데이터의 중요성을 이해하고, 추천시스템을 직접 만들어 볼 것입니다. 걱정하지 마세요. 본 과정을 이수하는데는 어려운 수학적인 이론도, 프로그래밍 개발 경험도 필요하지 않습니다. </p>
+    <p id="d444fd5f-4a1f-487b-bc90-48e2dab4f05f" class="">시작하기에 앞서 데이터 기반 스타트업 왓챠가 공룡 넷플릭스와 어떻게 시장에서 경쟁할 수 있었는지 다음 영상을 먼저 살펴보겠습니다. 본 영상을 통해 데이터가 실제 회사에서 어떻게 쓰이고 있는지, 왜 중요한지 한번 생각하는 시간을 가져봅시다.</p>
+    <div class=""video-container style="text-align:center"><object type="text/html" width="100%" height="500" data="https://www.youtube.com/embed/jT-LJidbG5U?rel=0&start=60&end=276"></object></div>
+    <p id="34b103ae-bbbf-43af-9b51-383c8cb051a0" class=""></p>
+    <p id="a844f845-695d-4c13-af62-a953179380a2" class="">추천시스템을 경험해 보기 위해서는 여러 다양한 지식들이 필요합니다. 그리고 그 지식들을 엮어 우리는 결국 추천시스템을 만들어 낼 것입니다. 가장 먼저 필요한 지식인 <strong>차원</strong><em>Dimension </em>에 대해서 살펴보도록 하겠습니다. </p>
+</div></div></div>
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="535c59e6-1048-4d7a-9e07-3cb4ba455b21" class="">개념소개 1) 3차원과 2차원</h2>
+    <hr id="a09b67f2-e21b-45d3-8baa-cfdde1f25637"/>
+    <p id="858ba018-fcf2-4e82-99c7-84406d800f55" class="">아이들이 가지고 노는 인형을 생각해 봅시다. 3차원 공간에서의 인형은 아래 그림의 바비인형과 같이 오똑한 코, 찰랑 거리는 머리카락, 앞뒤로 움직이는 팔과 다리를 가지고 있습니다. 하지만 2차원 공간에서의 인형은 평면에서만 표현되는 종이 인형과 같은 형태가 됩니다. </p>
+    <figure id="6122e1bc-c57f-4573-b232-5c28879ba7ef" class="image"><a href="img/lec01-01-01.png"><img style="width:773px" src="img/lec01-01-01.png"/></a></figure>
+</div></div></div>
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="e6fff754-5af3-4e46-a028-009a2bed1213" class="">개념소개 2) 차원과 숫자 그리고 벡터</h2>
+    <hr id="0910bac5-0d31-4de0-82b4-ea4a07e91f56"/>
+    <div id="e4236c28-49d8-4f3a-838a-7cfc14cd1edf" class="column-list">
+      <div id="5e03275d-5814-41a2-9fa3-62b35dac12e2" style="width:50%" class="column">
+        <p id="2a3f763d-ef97-4a85-80fa-bd1b981274a4" class="">우리가 사는 세상을 3차원이라고 많이들 이야기 합니다. 입체감을 느낄 수 있는 우리가 사는 공간을 (x, y, z)와 같은 세 개의 축으로 정의할 수 있기 때문입니다. </p>
+        <p id="8bf72eec-853e-417a-9b8b-d452ae5cc256" class="">반면 스케치북 위에 그린 그림은 평면위에 표현되기에, 2차원이라고 부릅니다. 2차원 공간은 (x, y) 처럼 2개의 숫자로 표현할 수 있습니다. </p>
+        <p id="7d1594fc-5044-413f-97af-e784b0b5046b" class="">그렇다면 1차원을 표현하기 위해서는 하나의 숫자만 있어도 되겠지요. </p></div>
+      <div id="de9c80b1-0183-48b0-8330-3aa1c6ec9efb" style="width:50%" class="column"><figure id="1dab6aa9-072d-4b47-8fcf-2f4d4d93bad5" class="image"><a href="img/lec01-01-02.png"><img style="width:288px" src="img/lec01-01-02.png"/></a></figure></div></div>
+    <p id="dacbf8a3-aedb-417a-85aa-3ffdbb49f807" class="">2차원을 나타내는 (x, y), 3차원을 나타내는 (x, y, z) 같은 숫자 모음을 우리는 <strong>벡터</strong><em>Vector</em> 라고 부릅니다. 우리가 상상하기는 힘들겠지만, 이 벡터라는 것을 이용하면 손쉽게 다차원 공간의 점을 표현할 수 있습니다. </p>
+    <blockquote id="4a9ffae4-2995-419e-87f7-a064afd08c9f" class="">2차원 벡터의 예 = (1, 2)</blockquote>
+    <blockquote id="294b9d0b-6fe0-4af9-b261-e3fd6d717c1b" class="">3차원 벡터의 예 = (1, 2, 1)</blockquote>
+    <blockquote id="2a5897f4-6ad3-49b1-9fca-4c84e6cb3eaf" class="">10차원 벡터의 예 = (1, 2, 1, 0, 3, 4, 2, 1, 10, 3)</blockquote>
+    <p id="26739dab-7a5c-467a-b416-e61151595015" class=""></p>
+    <p id="1df26308-9f2f-43d1-b639-2a6c33329720" class=""></p>
+</div></div></div>
+
+<h1 id="93b275d6-6f1a-4744-9c66-6443f42df4b8" class="">파이썬 프로그래밍 첫 만남</h1>
+<hr id="40bbbcee-81aa-4dfb-b608-658047b250d5"/>
+    <p id="18ae19cd-8908-4c21-b873-8d3a71f4807d" class="">여러분들은 본 과정을 진행하면서 사용자에게 알맞은 도서를 추천해주는 알고리즘을 개발하게 될 것 입니다. 그러기 위해서는 기본적인 프로그래밍을 할 수 있어야 합니다. </p><p id="4f30759b-0506-4768-8a25-0f4ba397e6ee" class="">프로그래밍을 해본 적이 없다구요? 걱정하지 마세요. 본 수업에 나오는 실습을 차근차근히 따라하다보면 어느덧 여러분만의 추천시스템을 만들게 될 것입니다. </p>
+    <p id="381b9bfb-df0b-4769-9a15-02e3b45fb027" class=""></p>
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="be672f92-05c3-4821-80b1-40fbff41a2f7" class="">프로그래밍 1) 화면 출력하기</h2>
+    <hr/>
+    <p id="3a1adf85-1f9c-49b3-965b-0fc7521f9266" class="">보통 프로그램을 처음 배울 때는 화면 출력하기를 먼저 배우곤 합니다. 여러분도 화면에 &#x27;안녕, 파이썬&#x27;을 출력해 봅시다. 출력하고자 하는 문장을 작은 따옴표( &#x27; )로 묶고 print( ) 라는 함수 안에 적어주기만 하면 됩니다.</p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:100px">
+
+                <div class="column bg-gray-500 px-2 py-2">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-1-1', 'output-1-1-1', 'mycanvas-1-1-1')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-1-1" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+print('Hello Python!')
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-1-1" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-1-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <p id="93ca19d1-ec06-49c2-a896-402b2e80b3ea" class="">어때요? 화면에 "Hello Python!"이 잘 출력되나요?  </p>
+    <hr/>
+    <p id="e034c357-643b-41c9-8124-fe1b871b644b" class="">그럼 이번에는 문장이 아니라 숫자를 화면에 출력해볼까요? &#x27;I ate 2 apples.&#x27;를 다양한 방법으로 출력해보겠습니다. </p>
+    <p id="f12cbe86-6400-48cd-8add-75f19106a0f9" class="">(1) 작은 따옴표 안에 문장을 모두 넣는 방법. 이것은 위와 동일하므로 설명은 생략하겠습니다.</p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:100px">
+
+                <div class="column bg-gray-500 px-2 py-2 col-sm-0 ">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-1-2', 'output-1-1-2', 'mycanvas-1-1-2')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-1-2" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+print('I ate 2 apples.')
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-1-2" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-1-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    <p id="75566cb1-a6b9-410d-b1fb-8f99e0cfcad0" class="">(2) 숫자 정보를 따로 넣는 방법</p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:100px">
+
+                <div class="column bg-gray-500 px-2 py-2 col-sm-0 ">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-1-3', 'output-1-1-3', 'mycanvas-1-1-3')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-1-3" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+apples=2
+print('I ate {} apples.'.format(apples))
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-1-3" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-1-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <p id="b606b6ee-a548-42cc-8371-bc3d3ee4c9e6" class="">위의 코드와 같이 숫자 정보를 따로 넣어줄 수도 있습니다. 그럼 이제 실행을 해볼까요? 우리가 예상한 대로 잘 출력되고 있습니다.</p>
+</div></div></div>
+
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="2c563b0a-c223-4630-90da-88f4af05f5f0" class="">프로그래밍 2) 문자열, 정수와 실수</h2>
+    <hr/>
+    <p id="7df907fc-996b-48a2-a613-70e5f322761e" class="">만약 사과를 하나 더 먹어서 &#x27;I ate 3 apples.&#x27;라고 출력한다고 생각해 봅시다. 숫자 정보를 활용하는 경우, 아주 간단하게 바꾸어 출력을 할 수가 있습니다.</p>
+    <p id="af88e7e3-532b-4ff4-a30c-9bc871f3b8ae" class=""></p>
+    <p id="45a50bec-3cd3-44a8-a0c0-d849c78a611a" class="">위 코드를 다시 살짝 수정해 볼까요? </p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:100px">
+
+                <div class="column bg-gray-500 px-2 py-2 col-sm-0 ">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-1-4', 'output-1-1-4', 'mycanvas-1-1-4')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-1-4" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+apples=2
+print('I ate {} apples.'.format(apples+1))
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-1-4" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-1-4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <p id="56cc0ff0-602f-4e0e-be37-3b25f65ad5fb" class="">숫자 뿐 아니라 문장 역시 꼭 print ( ) 함수 내에 적지 않아도 됩니다. 작은 따옴표로 묶인 &#x27;I ate&#x27;, &#x27;apples&#x27; 는 <strong>문자열</strong><em>String </em>이라고 부릅니다. 또한 프로그래밍에서 2, 3 과 같은 숫자는 <strong>정수</strong><em>int </em>, 2.1, 3.3 과 같은 숫자는 <strong>실수</strong><em>float </em>라고 부릅니다.</p>
+</div></div></div>
+
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="870c83d6-b59c-4cf3-ae5b-291cc12da271" class="">프로그래밍 3) 벡터를 표현하려면?</h2>
+    <hr/>
+    <p id="e0a173e8-af4c-49e5-a5f3-a91606578e39" class="">파이썬 프로그래밍에서는 벡터를 다양한 방법으로 표현할 수 있습니다. 본 강좌에서는 <strong>리스트</strong><em>list </em>라는 것을 활용합니다. 3차원 벡터 (1, 2, 1)를 한 번 만들어볼까요? 벡터를 만들고 print( ) 함수로 출력까지 해보겠습니다.</p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:100px">
+
+                <div class="column bg-gray-500 px-2 py-2 col-sm-0 ">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-1-5', 'output-1-1-5', 'mycanvas-1-1-5')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-1-5" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+a=[1, 2, 1]
+print(a)
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-1-5" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-1-5"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <p id="c4105ce4-26c4-4a44-b143-35db64783e73" class="">이렇듯 아주 손쉽게 우리는 다차원의 벡터를 만들어 낼 수가 있습니다. </p>
+    <p id="7f857e5a-a802-4acb-9fda-8267fbe30157" class=""></p>
+    <hr/>
+    <p id="d24a8cfa-46ff-4a68-a457-6d8e5ec58a1a" class="">이번에는 문자열로 이루어진 리스트를 만들어 보겠습니다. food라는 리스트에 &#x27;Chicken&#x27;, &#x27;Pasta&#x27;, &#x27;Pizza&#x27;, &#x27;Burger&#x27; 이라는 음식이름 문자열을 넣고, 첫번째 음식인 &#x27;Chicken&#x27;을 꺼내보겠습니다.  </p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:100px">
+
+                <div class="column bg-gray-500 px-2 py-2 col-sm-0 ">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-1-6', 'output-1-1-6', 'mycanvas-1-1-6')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-1-6" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+food=['Chicken', 'Pasta', 'Pizza', 'Burger']
+print('I want to eat {}.'.format( food[1] ) )
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-1-6" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-1-6"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    <p id="b893ec0c-72fd-45c1-ac1e-d66ce7114e9a" class="">앗! 분명히 &#x27;Chicken&#x27;을 출력하기 위해 food[1] 이라고 적었는데, 두번째 음식인 &#x27;Pasta&#x27;가 출력 되었네요. (대부분의 컴퓨터 프로그램에서 첫번째 항목이라는 것을 0번째로 표현합니다. 여기서도 food[1]이 첫번째 항목이 아니고, food[0]이 첫번째 항목임에 주의하세요.) </p>
+    <p>그럼 이에 맞게 위의 코드를 다시 수정해서 실행해 보세요. "I want to eat Chicken."이 정상적으로 출력되시나요?</p>
+    <hr/>
+    <p id="3edd03e7-b00c-44a0-a36e-e185b255a92d" class="">자, 이제 여러분은 차원의 개념과 벡터, 그리고 그 개념을 구현하기 위한 파이썬 프로그래밍에 대해 배웠습니다. 다 이해 되셨나요? 이렇게 배운 지식을 바탕으로 앞으로 주어지는 미니프로젝트들을 수행해 나가면서 추천시스템을 완성해 나갈 것입니다. 앞으로 나올 미니프로젝트들은 모두 그 내용이 연결되어 있습니다. 모르는 것은 대충 건너뛰다보면 뒤에 나올 프로젝트를 진행하기 어렵기 때문에 반드시 각 장의 내용을 잘 숙지하시고 완전한 이해를 하게 이해가 안되신 분은 다시 한 번 복습하시기 바랍니다.  </p><p id="5c5dd66f-0101-4bb5-9e89-5fcc16a64bf2" class=""></p>
+</div></div></div>
+
+
+<h1 id="08fb39bf-9885-4704-b442-d9accc664443" class="">미니프로젝트 1) 내가 읽은 책 표시하기</h1>
+<hr/>
+<p id="e0eb6c88-3ecd-46f5-a90d-15aa83f84af9" class="">여러분들은 이제 사용자에게 알맞은 도서를 추천해주는 알고리즘을 개발하게 될 것 입니다. 그러기 위해서는 먼저 사용자가 어떤 책을 읽었는지 체크하는 기능이 필요합니다.</p>
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="08fb39bf-9885-4704-b442-d9accc664444" class="">해결방법의 단계적 분석</h2>
+    <hr id="eaab4944-0adf-4ba8-8d2c-257342a9b312"/>
+    <p id="e0eb6c88-3ecd-46f5-a90d-15aa83f84af0" class="">먼저 books 라는 리스트를 만들고, &#x27;The Cosmos&#x27;, &#x27;Romance of Three Kingdoms&#x27;, &#x27;Sapiens&#x27; 라는 3권의 책을 books라는 리스트에 넣어 보겠습니다. </p>
+    <pre id="2eac37d1-a174-44c1-bea7-3a80f7f52a88" class="code"><code>books = [&#x27;The Cosmos&#x27;, &#x27;Romance of Three Kingdoms&#x27;, &#x27;Sapiens&#x27;]</code></pre>
+    <p id="af0e697b-976c-424e-a91d-91649fc50f0c" class="">여러분은 그 중에서 &#x27;Romance of Three Kingdoms&#x27; 와 &#x27;Sapiens&#x27; 라는 책은 구매해서 읽었지만, &#x27;The Cosmos&#x27;는 읽지 않았다고 생각해보죠. 읽었는지 읽지 않았는지 표현해주는 mylist 라는 새로운 리스트를 만들어 보겠습니다.</p>
+    <pre id="f8987a22-1d9a-482b-83a1-40ffbb482335" class="code"><code>mylist=[0, 1, 1]</code></pre>
+    <p id="5d6a14a7-0e4e-42c7-8f28-a9912ee27d52" class="">그러면 여러분이 읽은 책만 출력하는 프로그램을 만드려면 어떻게 하면 될까요? 먼저 여러분이 &#x27;The Cosmos&#x27; 라는 책을 읽었는지 알아보죠. &#x27;The Cosmos&#x27;는 books 리스트의 첫번째 항목입니다. 다음과 같이 코드를 입력하고 실행해봅시다. </p>
+    <pre id="489c5de2-e172-4f66-8828-8e1bfed405d3" class="code"><code>print(books[0])</code></pre>
+    <p id="f42c2e0b-113a-4814-acd7-edd997e65bac" class="">그러면 &#x27;The Cosmos&#x27; 가 출력되는 것을 알 수 있습니다. (대부분의 프로그램에서 첫번째 항목이라는 것을 0번째로 표현합니다. 여기서도 books[1]이 첫번째 항목이 아니고, books[0]이 첫번째 항목임에 주의하세요.)</p>
+
+
+    <p id="e34b9518-a8c2-4879-baf2-aa0870809e0f" class="">하지만, 사실 &#x27;The Cosmos&#x27; 라는 책은 읽지 않았습니다. 그 정보는 mylist[0] 을 보면 알 수 있죠. mylist[0] 의 값이 1이면 책을 읽은 것이고, 0이라면 책을 읽지 않은 것입니다. 자, 이렇게 한번 코드를 입력하고 실행해 봅시다. </p>
+    <pre id="327954f3-2fa4-49bc-810e-2181633c35d5" class="code"><code>print(books[0]*mylist[0])</code></pre>
+    <p id="198ddfef-ed47-43d1-a2dc-fa16ad685ca6" class="">앗, 아무것도 출력되지 않네요?!! 여러분이 읽지 않은 책인가 봅니다. </p>
+
+    <p id="8c0323d1-4e97-4239-a51a-d0c232bb1461" class="">그러면 이번에는 &#x27;Romance of Three Kingdoms&#x27;라는 책을 읽었는지 확인해볼까요? </p>
+    <pre id="047dc2db-71bd-4caf-9556-1642c390f66b" class="code"><code>print(books[1]*mylist[1])</code></pre>
+
+    <p id="5d98c6c8-ee61-453d-8084-294740305871" class="">&#x27;Romance of Three Kingdoms&#x27;는 출력이 되는 걸 보니, 여러분이 읽은 책이군요!!!</p>
+    <p id="657caa8e-1589-4321-a9b8-0fd6533d27c8" class="">자, 마지막으로 &#x27;Sapiens&#x27; 책을 읽었는지도 살펴봅시다. </p>
+    <pre id="3f140de8-d0ea-4ddd-8e31-86f442391692" class="code"><code>print(books[2]*mylist[2])</code></pre>
+
+    <p id="fef9e448-7ce0-419a-9f70-58e807de0def" class="">잘 출력이 되는 걸 보니, 읽은 책이 맞군요.</p>
+    <hr/>
+    <p id="e3376c69-bdab-4093-8aae-df928e0c47de" class="">자, 지금까지 내가 읽은 책들을 출력하는 프로그램을 만들어 보았습니다. 그 순서는 다음과 같습니다.</p>
+    <p id="04549503-569a-4089-89c8-1eb6cb744e80" class="">(1) &#x27;books라는 책제목 리스트에 The Cosmos&#x27;, &#x27;Romance of Three Kingdoms&#x27;, &#x27;Sapiens&#x27; 책을 넣는다.</p>
+    <p id="d0feb721-c727-407e-8d38-a357fac77756" class="">(2) 그 중에 내가 읽은 책인 &#x27;Romance of Three Kingdoms&#x27;와 &#x27;Sapiens&#x27;는 1로 표시, 읽지 않은 &#x27;The Cosmos&#x27;는 0으로 표시하는 mylist 라는 리스트를 만든다.</p>
+    <p id="d5a07300-2866-406b-8d6c-33b483f13e2f" class="">(3) 내가 읽은 책들을 출력한다.</p>
+    <p id="e638233b-ef7a-4e47-a558-44dbc4def141" class="">이에 대한 전체 코드는 다음과 같습니다.</p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:300px">
+
+                <div class="column bg-gray-500 px-2 py-2 col-sm-0 ">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-1-7', 'output-1-1-7', 'mycanvas-1-1-7')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-1-7" style="width:100%;height:300px;border:1;overflow:visible;text-overflow:ellipsis;">
+# 책제목 리스트 books 만들기
+books = [&#x27;The Cosmos&#x27;, &#x27;Romance of Three Kingdoms&#x27;, &#x27;Sapiens&#x27;]
 
 # 내가 읽은 책 mylist에 표시하기
 mylist=[0, 1, 1]
@@ -113,12 +368,67 @@ mylist=[0, 1, 1]
 print(books[0]*mylist[0])
 print(books[1]*mylist[1])
 print(books[2]*mylist[2])
-</code></pre><p id="bcce8d22-0fe9-4769-aac9-dc57b0cc5e73" class="">
-</p><p id="f2631990-dfc1-4e38-b34c-87aab104c6f2" class="">이 내용을 바탕으로 다음의 문제를 풀어봅시다.</p><p id="60955cd5-001b-4fe1-b82a-8938a92f3974" class="">(1) 10권의 책을 books 에 넣습니다. 책 제목들은 다음과 같습니다. </p><p id="4e3bd753-b039-40ad-8f3f-dde42fb7d5f4" class="">&#x27;코스모스&#x27;, &#x27;삼국지&#x27;, &#x27;사피엔스&#x27;, &#x27;어린왕자&#x27;, &#x27;소나기&#x27;, &#x27;총균쇠&#x27;, &#x27;함께자라기&#x27;,&#x27;초격차&#x27;,&#x27;호모데우스&#x27;,&#x27;파워풀&#x27;</p><p id="59b0001c-3517-42ff-855a-957914621ee6" class="">(2) 그 중 내가 읽은 책을 mylist에 표시합니다.</p><p id="1666b219-4951-4b78-a65f-bd33891d5b81" class="">&#x27;삼국지&#x27;, &#x27;사피엔스&#x27;, &#x27;함께자라기&#x27;, &#x27;호모데우스&#x27;, &#x27;파워풀&#x27;</p><p id="36aef5a9-c590-4ccd-8697-6b2ebcacbb79" class="">(3) 내가 읽은 책들을 출력합니다.</p><pre id="0068d3c2-b46b-4dbd-82b8-c02fb3faa37c" class="code"><code>books=[&#x27;코스모스&#x27;,&#x27;삼국지&#x27;,&#x27;사피엔스&#x27;,&#x27;어린왕자&#x27;,&#x27;소나기&#x27;,&#x27;총균쇠&#x27;,&#x27;함께자라기&#x27;,&#x27;초격차&#x27;,&#x27;호모데우스&#x27;,&#x27;파워풀&#x27;]
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-1-7" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-1-7"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+</div></div></div>
 
-...</code></pre><p id="518a2279-abd9-44a8-8fda-77baebaeee11" class="">
-</p><p id="e1b65901-917e-446f-bc01-7e599c1b35e5" class="">
-</p></div></article>
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="08fb39bf-9885-4704-b442-d9accc664446" class="">도전과제) 스스로 해결해 봅시다.</h2>
+    <hr/>
+    <p id="bcce8d22-0fe9-4769-aac9-dc57b0cc5e73" class=""></p>
+    <p id="f2631990-dfc1-4e38-b34c-87aab104c6f2" class="">위 내용을 바탕으로 다음의 문제를 스스로 풀어봅시다.</p>
+    <p id="60955cd5-001b-4fe1-b82a-8938a92f3974" class="">(1) 10권의 책을 books 에 넣습니다. 책 제목들은 다음과 같습니다. </p>
+    <p id="4e3bd753-b039-40ad-8f3f-dde42fb7d5f4" class="">&#x27;The Cosmos&#x27;, &#x27;Romance of Three Kingdoms&#x27;, &#x27;Sapiens&#x27;, &#x27;Little Prince&#x27;, &#x27;Gone with the Wind &#x27;, &#x27;Gun, Germ, and Steel&#x27;, &#x27;The Way to Agile&#x27;,&#x27;What is the Leardership?&#x27;,&#x27;Homo Deus&#x27;,&#x27;The Powerful&#x27;</p>
+    <p id="59b0001c-3517-42ff-855a-957914621ee6" class="">(2) 그 중 내가 읽은 책을 mylist에 표시합니다.</p>
+    <p id="1666b219-4951-4b78-a65f-bd33891d5b81" class="">&#x27;Romance of Three Kingdoms&#x27;, &#x27;Sapiens&#x27;, &#x27;The Way to Agile&#x27;, &#x27;Homo Deus&#x27;, &#x27;The Powerful&#x27;</p>
+    <p id="36aef5a9-c590-4ccd-8697-6b2ebcacbb79" class="">(3) 내가 읽은 책들을 출력합니다.</p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:300px">
+
+                <div class="column bg-gray-500 px-2 py-2 col-sm-0 ">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-1-8', 'output-1-1-8', 'mycanvas-1-1-8')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-1-8" style="width:100%;height:300px;border:1;overflow:visible;text-overflow:ellipsis;">
+books=[&#x27;The Cosmos&#x27;,&#x27;Romance of Three Kingdoms&#x27;,&#x27;Sapiens&#x27;,&#x27;Little Prince&#x27;,&#x27;Gone with the Wind&#x27;,&#x27;Gun, Germ, and Steel&#x27;,&#x27;The Way to Agile&#x27;,&#x27;What is the Leardership?&#x27;,&#x27;Homo Deus&#x27;,&#x27;The Powerful&#x27;]
+
+#여기서부터 코드를 작성해 보세요.
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-1-8" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-1-8"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+</div></div></div>
+
+    <p id="518a2279-abd9-44a8-8fda-77baebaeee11" class=""></p>
+    <p id="e1b65901-917e-446f-bc01-7e599c1b35e5" class=""></p>
+  </div>
+</article>
 
         </div>
 

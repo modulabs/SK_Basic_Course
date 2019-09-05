@@ -35,41 +35,7 @@
 </head>
 
 <body id="page-top">
-<script type="text/javascript">
-// output functions are configurable.  This one just appends some text
-// to a pre element.
-function outf(text) {
-    var mypre = document.getElementById("output");
-    mypre.innerHTML = mypre.innerHTML + text;
-}
-function builtinRead(x) {
-    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
-            throw "File not found: '" + x + "'";
-    return Sk.builtinFiles["files"][x];
-}
-// Here's everything you need to run a python program in skulpt
-// grab the code from your textarea
-// get a reference to your pre element for output
-// configure the output function
-// call Sk.importMainWithBody()
-function runit() {
-   var prog = document.getElementById("yourcode").value;
-   var mypre = document.getElementById("output");
-   mypre.innerHTML = '';
-   Sk.pre = "output";
-   Sk.configure({output:outf, read:builtinRead});
-   (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'mycanvas';
-   var myPromise = Sk.misceval.asyncToPromise(function() {
-       return Sk.importMainWithBody("<stdin>", false, prog, true);
-   });
-   myPromise.then(function(mod) {
-       console.log('success');
-   },
-       function(err) {
-       console.log(err.toString());
-   });
-}
-</script>
+  <script type="text/javascript" src="skulpt.js"></script>
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -99,23 +65,76 @@ function runit() {
 
         </div>
         <!-- /.container-fluid -->
-        <div class="skulp-test">
-            <h3>Try This</h3>
+
+        <!-- Collapsable Card Example -->
+        <div class="card shadow mb-4 mx-2">
+          <!-- Card Header - Accordion -->
+          <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
+          </a>
+          <!-- Card Content - Collapse -->
+          <div class="collapse show" id="collapseCardExample">
+            <div class="card-body">
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:100px">
+
+                <div class="column bg-gray-500 px-2 py-2 col-sm-0 ">
+                  <a href="javascript:void(0);" onclick="runit('yourcode123', 'output123', 'mycanvas123')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode123" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">print ("Hello World")
+                    </textarea>
+                </div>
+              </div></form>
+              <hr id="40bbbcee-81aa-4dfb-b608-658047b250d5"/>
+              <div class="row">
+                <pre id="output123" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas123"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div>
+            <h3>연습 1</h3>
             <form>
-            <textarea id="yourcode" cols="40" rows="10">import turtle
-
-            t = turtle.Turtle()
-            t.forward(100)
-
-            print "Hello World"
+            <textarea id="yourcode1" cols="40" rows="10">print ("Hello World")
             </textarea><br />
-            <button type="button" onclick="runit()">Run</button>
+            <button type="button" onclick="runit('yourcode1', 'output1', 'mycanvas1')">Run</button>
             </form>
-            <pre id="output" ></pre>
+            <pre id="output1" ></pre>
             <!-- If you want turtle graphics include a canvas -->
-            <div id="mycanvas"></div>
+            <div id="mycanvas1"></div>
 
         </div>
+        <div>
+            <h3>연습 2</h3>
+            <form>
+            <textarea id="yourcode2" cols="40" rows="10">a = 2 + 3
+            print(a)
+            </textarea><br />
+            <button type="button" onclick="runit('yourcode2', 'output2', 'mycanvas2')">Run</button>
+            </form>
+            <pre id="output2" ></pre>
+            <!-- If you want turtle graphics include a canvas -->
+            <div id="mycanvas2"></div>
+
+        </div>
+
+        <pre id="output" ></pre>
+        <div id="mycanvas"></div>
 
       </div>
       <!-- End of Main Content -->
