@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>(주)모두의연구소 AI 온라인 튜토리얼</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="css/notion-style.css" rel="stylesheet">
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" src="include_html.js"></script>
+  <script type="text/javascript">
+  function leftCompleted() {
+   $("#left-sidebar").html();
+  }
+  function topCompleted() {
+   $("#right-topbar").html();
+  }
+  </script>
+
+  <script src="http://www.skulpt.org/js/skulpt.min.js" type="text/javascript"></script>
+  <script src="http://www.skulpt.org/js/skulpt-stdlib.js" type="text/javascript"></script>
+
+</head>
+
+<body id="page-top">
+  <script type="text/javascript" src="skulpt.js"></script>
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <include-html target="left.html" completed="leftCompleted"></include-html>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <include-html target="topbar.html" completed="topCompleted"></include-html>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+<article id="20e7852c-2244-47b3-a5c7-5f788caac879" class="page sans">
+  <header>
+    <div class="page-header-icon undefined">
+    <span class="icon">📝</span>
+    </div><h1 class="page-title">Lecture 2. 거리</h1></header>
+  <div class="page-body">
+    <p id="3297af83-fb0c-4b50-8e9b-7bbacf75b122" class=""></p>
+
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="e6fff754-5af3-4e46-a028-009a2bed1213" class="">2차원 공간에서의 거리 : 맨해튼 거리</h2>
+    <hr/>
+    <figure id="fd54064d-4548-4443-b4d9-d71c95e00cba" class="image"><a href="img/lec01-02-01.png"><img style="width:384px" src="img/lec01-02-01.png"/></a></figure><p id="d710f9a7-7a53-49bc-9c6e-072f2b7d39ae" class="">점 A(4,1) 에서  점 B(1,3)까지의 거리를 어떻게 구할 수 있을까요? 실제 수학적으로 거리라는 것은 다양한 방법으로 정의가 되지만, 우리는 두 가지 방법으로 2차원 공간에서의 거리를 구해보려고 합니다. </p>
+    <p id="c46cba0e-d5f1-4771-bbab-01331045bc18" class=""></p>
+
+    <h3 id="7341c5e9-7063-474f-86cb-3adeeaa98c83" class="">맨해튼 거리(L1거리)</h3><div id="1bf46b37-9b8c-4a9d-a040-012da46e780e" class="column-list">
+
+    <div id="7479b0a6-67af-40af-a34f-1290ad4fe66f" style="width:50%" class="column">
+        <p id="d41c4a42-a3e8-433c-a329-e5d247c7231c" class="">첫번째 방법은 <strong>맨해튼 거리</strong><em>Manhattan Distance</em> 입니다. 맨해튼 이라는 도시 지도를 보면 옆 그림과 같이 가로세로 격자와 같이 도로가 반듯하게 나 있습니다. 여러분이 A 지역에서 B 지역으로 이동할 때, 노란색 선처럼 건물들을 통과해서 걸어갈 수는 없겠죠?</p>
+        <p id="8dd27dbc-4afa-495e-aa59-743801042afb" class="">여러분들은 파란색 루트로 걸어갈 수 밖에 없습니다. 이런식으로 계산된 거리를 맨해튼 거리 또는 L1 거리라고 표현합니다. </p>
+        <p id="765c38b7-e693-43d6-b20b-ec150f6073fd" class=""></p>
+    </div>
+    <div id="ee2d7aa0-05e7-4ae6-8422-a82fd5bea34d" style="width:50%" class="column">
+        <figure id="bfed11f2-b3e1-40ae-9d28-7af8287df304" class="image"><a href="img/lec01-02-02.png"><img style="width:384px" src="img/lec01-02-02.png"/></a></figure></div></div>
+    <p id="2ea4c3d4-b0ab-479a-a8d7-14d7ca3e119d" class="">이와 비슷하게 우리는 점 A(4,1) 에서 점 B(1,3)까지의 거리를 구할 수 있습니다. 이해를 돕기 위해 다음과 같이 격자 표시를 하도록 하겠습니다. 자 이제는 가로로 몇 칸 떨어져있는지, 세로로 몇 칸 떨어져 있는지 확인하기만 하면 됩니다. 그림에서 볼 수 있듯이 A(4,1)에서 B(1,3)까지의 거리는 5가 됩니다. </p>
+    <figure id="70db18f1-e6de-446a-9647-7cbb441396a6" class="image"><a href="img/lec01-02-03.png"><img style="width:288px" src="img/lec01-02-03.png"/></a></figure>
+    <p id="ef7bd7ee-744c-47d5-be20-68ea6edfbed9" class="">이것을 수식으로 표현하면,</p>
+    <figure id="41358fc7-e9cc-46a9-aea1-e8c79864578b" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi mathvariant="normal">부</mi><mi mathvariant="normal">터</mi><mtext> </mtext><mi>B</mi><mi mathvariant="normal">까</mi><mi mathvariant="normal">지</mi><mi mathvariant="normal">의</mi><mtext> </mtext><mi mathvariant="normal">거</mi><mi mathvariant="normal">리</mi><mo>=</mo><mi mathvariant="normal">∣</mi><mn>4</mn><mo>−</mo><mn>1</mn><mi mathvariant="normal">∣</mi><mo>+</mo><mi mathvariant="normal">∣</mi><mn>1</mn><mo>−</mo><mn>3</mn><mi mathvariant="normal">∣</mi><mo>=</mo><mn>5</mn><mtext>       </mtext><mo>(</mo><mi mathvariant="normal">수</mi><mi mathvariant="normal">식</mi><mtext> </mtext><mn>2</mn><mo>−</mo><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">A부터~ B까지의~ 거리 = |4-1|+|1-3|=5 ~~~~~~~ (수식~2-1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord hangul_fallback">부</span><span class="mord hangul_fallback">터</span><span class="mspace nobreak"> </span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord hangul_fallback">까</span><span class="mord hangul_fallback">지</span><span class="mord hangul_fallback">의</span><span class="mspace nobreak"> </span><span class="mord hangul_fallback">거</span><span class="mord hangul_fallback">리</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">3</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">5</span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mopen">(</span><span class="mord hangul_fallback">수</span><span class="mord hangul_fallback">식</span><span class="mspace nobreak"> </span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span></div></figure>
+    <p id="c18cc4d6-766a-4483-8e16-1f8ac6acb17a" class="">처럼 절대값의 합으로 표현할 수 있습니다. 여기서 4-1은 가로로 몇 칸이 떨어져있는지, 1-3은 세로로 몇 칸이 떨어져 있는지를 나타냅니다. </p><p id="dfa6d57a-d95f-4901-8aef-9d202f0f267c" class=""></p>
+    <p id="66c4e46d-7267-4d92-8cbf-889aa9787aed" class=""><code>Quiz 2-1</code> 점 A(4,7)과 점 B(6, 5) 사이의 맨해튼 거리를 구하시오.</p>
+    <pre id="ee27e367-59a9-4e8b-ae22-bc41d654b1d6" class="code"><code>정답 : 4
+해설 : 가로로 떨어진 칸 수 = |6-4|, 세로로 떨어진 칸 수 = |5-7| 이므로, 최종 맨해튼 거리는 4가 된다. </code></pre>
+    <p id="6aadc2bb-8cc9-40a8-a5cb-c7c92cb78289" class="">
+</p>
+</div></div></div>
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="e6fff754-5af3-4e46-a028-009a2bed1214" class="">파이썬으로 구현하는 맨해튼 거리</h2>
+    <hr id="0910bac5-0d31-4de0-82b4-ea4a07e91f56"/>
+    <h3 id="ba113a6f-1bb3-400c-8a3a-769b02ee3c66" class="">절대값</h3>
+    <p id="c32b05ca-3d2d-4c7b-860e-dce7214a2409" class="">자, 그러면 파이썬 프로그래밍으로 점 A(4,1)부터 B(1,3) 까지의 맨해튼 거리를 구해봅시다. 맨해튼 거리를 계산하는데 있어서 절대값을 구해야 합니다. 파이썬에서 절대값은 다음과 같이 abs( ) 함수를 통해 구할 수 있습니다.</p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:200px">
+
+                <div class="column bg-gray-500 px-2 py-2">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-2-1', 'output-1-2-1', 'mycanvas-1-2-1')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-2-1" style="width:100%;height:200px;border:1;overflow:visible;text-overflow:ellipsis;">
+a=1
+b=3
+c=a-b
+d=abs(a-b)
+print('Difference a-b = {}.'.format(c))
+print('Absolute difference abs(a-b) = {}.'.format(d))
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-2-1" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-2-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    <p id="71d8f44a-698e-4384-ac57-08a2e8a7085f" class=""></p>
+    <hr/>
+    <h3 id="af4d0ac9-b3e9-4223-9df6-257615880efe" class="">2차원 공간의 맨해튼 거리</h3>
+    <p id="17dd94b4-e09f-4b8a-b26f-0ab76996a6d2" class="">이제 절대값 함수 abs( ) 도 배웠으니, 맨해튼 거리를 진짜로 구해보죠. 먼저 다음과 같이 점 A와 B를 리스트로 표현합니다. (2차원 벡터는 리스트를 사용한다고 전 lecture에서 배운 것 기억하시죠?)</p>
+
+    <pre id="9abc94d4-35e6-4440-8e6c-ecbf4bfca533" class="code"><code>A=[4,1]
+B=[1,3]</code></pre>
+    <p id="4bf849c3-f603-421d-9aa3-d20393d4ae08" class="">(수식 2-1)에서 처럼, 가로로 떨어진 칸 수  |4-1| 와 세로로 떨어진 칸 수 |1-3| 을 구해봅시다. 점 A에서 4 라는 수는 A[0], 점 B에서 1 이라는 수는 B[0]으로 표현됩니다. 그러면 (수식 2-1)은 다음과 같이 계산될 수 있습니다.</p>
+    <pre id="2e52717e-034e-4082-9b63-b76dccbe3ea4" class="code"><code>c=abs(A[0]-B[0])+abs(A[1]-B[1])</code></pre>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:200px">
+
+                <div class="column bg-gray-500 px-2 py-2">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-2-2', 'output-1-2-2', 'mycanvas-1-2-2')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-2-2" style="width:100%;height:200px;border:1;overflow:visible;text-overflow:ellipsis;">
+A=[4,1]
+B=[1,3]
+C=abs(A[0]-B[0])+abs(A[1]-B[1])
+print('Absolute difference between A and B = {}.'.format(C))
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-2-2" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-2-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <p id="f7a9cf86-b364-44c4-b070-c078e593cd41" class=""></p>
+</div></div></div>
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="be672f92-05c3-4821-80b1-40fbff41a2f7" class="">2차원 공간에서의 거리 : L2 거리</h2>
+    <hr/>
+
+    <div id="27bcbfb0-03cb-455a-878b-e78c6d9674ed" class="column-list">
+        <div id="982fbc4c-60c7-4fb5-b113-03af04ebf121" style="width:68.75%" class="column"><p id="b96a7f2d-04a6-45bd-b198-5c73534fcf1a" class="">일반적으로 두 점을 잇는 거리라고 하면 맨해튼 거리와 같이 빙 둘러가는 거리가 아닌 직선거리를 생각하게 됩니다. </p>
+            <p id="cdd4cf55-9a92-4003-a33d-9ea3814ae737" class="">그렇다면 이러한 직선거리는 어떻게 구할 수 있을까요? 이 때는 그 유명한 피타고라스 정리를 이용하게 됩니다. </p>
+        </div>
+        <div id="52331590-7817-4944-8c4f-1892c384b6ce" style="width:31.25%" class="column">
+        <figure id="1fa6dd5d-a923-44c0-b6b3-c575b09326f0" class="image"><a href="img/lec01-02-04.png"><img style="width:336px" src="img/lec01-02-04.png"/></a></figure></div></div>
+    <p id="534edbf0-ff85-446b-acdd-24fac120b67e" class=""></p>
+    <h3 id="4d237f5e-88f5-42dd-adc5-6514021c7d06" class="">피타고라스의 정리</h3>
+    <p id="b35e2c2e-2921-4397-83e5-25a36ddbd6e8" class="">삼각형의 빗변의 길이를 구하는 공식인 피타고라스의 정리 기억나시나요? 우리에게 많이 익숙한 공식이지만, 다시 한 번 살펴보도록 하겠습니다. </p>
+    <blockquote id="2755aaad-b48e-4d61-afa7-b07bd636c393" class="">피타고라스 정리 : 빗변 길이의 제곱은 다른 두 변 길이 제곱의 합과 같다.</blockquote>
+    <figure id="377532e5-f1aa-41e9-ad3f-e4e8c948f952" class="image"><a href="img/lec01-02-05.png"><img style="width:480px" src="img/lec01-02-05.png"/></a></figure>
+    <figure id="104ddea7-2958-4f5d-a469-03cb624b38ae" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css')</style>
+        <div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>c</mi><mn>2</mn></msup><mo>=</mo><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mtext>               </mtext><mo>(</mo><mi mathvariant="normal">수</mi><mi mathvariant="normal">식</mi><mtext> </mtext><mn>2</mn><mo>−</mo><mn>2</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">c^2 = a^2 + b^2~~~~~~~~~~~~~~~(수식~2-2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.9474379999999999em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mopen">(</span><span class="mord hangul_fallback">수</span><span class="mord hangul_fallback">식</span><span class="mspace nobreak"> </span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mclose">)</span></span></span></span></span></div></figure><figure id="77000616-f00a-47fb-9bb2-1fbc777a0a34" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mo>=</mo><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt><mtext>            </mtext><mo>(</mo><mi mathvariant="normal">수</mi><mi mathvariant="normal">식</mi><mtext> </mtext><mn>2</mn><mo>−</mo><mn>3</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">c=\sqrt{a^2 +b^2} ~~~~~~~~~~~~ (수식 ~2-3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.3122639999999999em;vertical-align:-0.25em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0622639999999999em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.0222640000000003em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg width='400em' height='1.28em' viewBox='0 0 400000 1296' preserveAspectRatio='xMinYMin slice'><path d='M263,681c0.7,0,18,39.7,52,119c34,79.3,68.167,
+158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120c340,-704.7,510.7,-1060.3,512,-1067
+c4.7,-7.3,11,-11,19,-11H40000v40H1012.3s-271.3,567,-271.3,567c-38.7,80.7,-84,
+175,-136,283c-52,108,-89.167,185.3,-111.5,232c-22.3,46.7,-33.8,70.3,-34.5,71
+c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1s-109,-253,-109,-253c-72.7,-168,-109.3,
+-252,-110,-252c-10.7,8,-22,16.7,-34,26c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26
+s76,-59,76,-59s76,-60,76,-60z M1001 80H40000v40H1012z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.177736em;"><span></span></span></span></span></span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mspace nobreak"> </span><span class="mopen">(</span><span class="mord hangul_fallback">수</span><span class="mord hangul_fallback">식</span><span class="mspace nobreak"> </span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">3</span><span class="mclose">)</span></span></span></span></span></div></figure><p id="66a92da9-5212-49ad-a7a9-336a4fe3fa72" class="">
+</p>
+    <h3 id="ff748039-6f2e-4803-9558-f8449578bb10" class="">2차원 공간에서의 피타고라스 정리</h3>
+    <div id="80b09ef0-c8ce-440e-ac40-a1b2023d54b6" class="column-list">
+        <div id="b6ddf1c2-f63d-4dd1-bacb-c00f6281464a" style="width:68.75%" class="column">
+    <p id="52997e81-adb6-4719-9d3d-ee28ee7e3d72" class="">그렇다면 이제 점 A(4,1) 과 B(1,3) 사이의 거리를 피타고라스를 이용해 구해봅시다. </p>
+            <p id="9dd7d1fd-b1b6-4b02-b86f-db1bc0c3ce53" class="">밑변의 길이는 3 높이는 2가 되므로, </p>
+            <figure id="898d7c50-011d-4220-b366-90067d6d8ca6" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css')</style>
+                <div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">거</mi><mi mathvariant="normal">리</mi><mo>=</mo><msqrt><mrow><msup><mn>3</mn><mn>2</mn></msup><mo>+</mo><msup><mn>2</mn><mn>2</mn></msup></mrow></msqrt><mo>=</mo><msqrt><mn>13</mn></msqrt></mrow><annotation encoding="application/x-tex">거리 = \sqrt{3^2+2^2}=\sqrt{13}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord hangul_fallback">거</span><span class="mord hangul_fallback">리</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.2399999999999998em;vertical-align:-0.177736em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0622639999999999em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mord"><span class="mord">3</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.0222640000000003em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg width='400em' height='1.28em' viewBox='0 0 400000 1296' preserveAspectRatio='xMinYMin slice'><path d='M263,681c0.7,0,18,39.7,52,119c34,79.3,68.167,
+158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120c340,-704.7,510.7,-1060.3,512,-1067
+c4.7,-7.3,11,-11,19,-11H40000v40H1012.3s-271.3,567,-271.3,567c-38.7,80.7,-84,
+175,-136,283c-52,108,-89.167,185.3,-111.5,232c-22.3,46.7,-33.8,70.3,-34.5,71
+c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1s-109,-253,-109,-253c-72.7,-168,-109.3,
+-252,-110,-252c-10.7,8,-22,16.7,-34,26c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26
+s76,-59,76,-59s76,-60,76,-60z M1001 80H40000v40H1012z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.177736em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.08390500000000001em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.956095em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">1</span><span class="mord">3</span></span></span><span style="top:-2.916095em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,
+-10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8,
+-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10s173,378,173,378c0.7,0,
+35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429c69,-144,104.5,-217.7,106.5,
+-221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
+s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
+s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.08390500000000001em;"><span></span></span></span></span></span></span></span></span></span></div></figure>
+    <p id="512862dd-6ed7-46a4-9252-8c08ad7f3fdb" class="">이 됩니다. </p>
+    <p id="c0015113-421c-4584-b8d2-b65fea6a4670" class="">우리는 이것을 L2 거리 또는 <strong>유클리디안 거리</strong><em>Euclidean Distance </em>라고 부릅니다. </p>
+    <p id="558fd9f5-3c4f-4595-8353-4fbb2ace8432" class=""></p></div>
+    <div id="f9be749d-9bbb-41bf-bc81-cdf4ee12fb38" style="width:31.25%" class="column">
+        <figure id="782e085f-5f4e-4fd4-9170-28adf9714914" class="image"><a href="img/lec01-02-06.png"><img style="width:288px" src="img/lec01-02-06.png"/></a></figure></div></div><p id="3a1b6983-20ae-4b1f-8d34-6ad2f7655353" class=""><code>Quiz 2-2</code> 점 A(4,7)과 점 B(6, 5) 사이의 L2 거리를 구하시오.</p><pre id="8f7f929d-03b1-4fa1-b0bd-2f4645e230e6" class="code"><code>정답 : sqrt(8)
+해설 : 가로 길이가 |6-4|=2, 세로 길이가 |5-7|=2 이므로, L2 거리는 sqrt(2^2+2^2)=sqrt(8) 이 된다. </code></pre><p id="ef77ca18-0591-421e-a1c8-d981b814a69f" class="">
+</p>
+
+</div></div></div>
+
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="2c563b0a-c223-4630-90da-88f4af05f5f0" class="">파이썬으로 구현하는 L2 거리</h2>
+    <hr/>
+
+    <h3 id="94bef6eb-fcc9-4e16-a15e-8ea4c771af29" class="">제곱과 제곱근</h3>
+    <p id="47dabce4-c796-48e9-8ac9-b9826bef9d65" class="">맨해튼 거리에서는 &#x27;절대값&#x27;이 사용되었다면, L2 거리는 <strong>제곱</strong><em>Power</em> 과 <strong>제곱근</strong><em>Square Root(sqrt)</em> 을 필요로 합니다. 따라서, 파이썬 프로그래밍에서 제곱과 제곱근을 어떻게 구하는지를 먼저 살펴보아야 합니다.  </p>
+    <hr/>
+    <h3 id="590c0750-ed2a-42fe-9d87-91bfe28ded1b" class="">제곱</h3>
+    <p id="f1505bf6-da07-4a00-8a3e-3a2abeda47d0" class="">어떤 수의 제곱을 구할 때, 파이썬에서는 pow( )라는 함수를 사용합니다.</p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:100px">
+
+                <div class="column bg-gray-500 px-2 py-2">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-2-3', 'output-1-2-3', 'mycanvas-1-2-3')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-2-3" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+a=pow(3,2)
+print('Power(2) of 3 (i.e. 3^2) = {}'.format(a))
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-2-3" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-2-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <p id="b1eeffe4-5f13-4a2d-8abc-0ed573876f20" class=""></p>
+    <p id="8f345623-02c2-4655-9811-2cc5e84c8d6d" class="">하지만, 사실 보다 더 간단한 방법이 있습니다. 같은 수를 그냥 두 번 곱하는 것입니다.</p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:100px">
+
+                <div class="column bg-gray-500 px-2 py-2">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-2-4', 'output-1-2-4', 'mycanvas-1-2-4')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-2-4" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+a=3*3
+print('Power(2) of 3 (i.e. 3*3) = {}'.format(a))
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-2-4" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-2-4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <p id="115ff234-583c-4d74-a962-9c0d3e8d266f" class="">위 두 코드의 결과는 당연히 같습니다. </p>
+    <p id="24605e31-c7bc-4df4-b021-c64e259ff82e" class=""></p>
+    <hr/>
+    <h3 id="cc70f1bb-d1aa-4d23-8dc7-486d4c801a09" class="">제곱근</h3>
+    <p id="4ddf9868-9c51-473b-a164-7c7932dc89ed" class="">절대값이나 제곱과는 달리 파이썬에서 제곱근은 기본적으로 지원해주지 않습니다. 그러나 걱정마세요! 이미 누군가가 다 만들어 두었으니까요. 그러면 이제 파이썬이 기본으로 제공되지 않는 함수들을 사용하는 방법에 대해 알아보겠습니다. </p>
+    <p id="5c1b19bc-807d-4549-9220-b4024a3b9439" class="">파이썬에서 사용할 수 있는 함수들을 모아놓은 보따리를 <strong>라이브러리</strong><em>Library</em> 라고 부릅니다. sqrt( ) 함수는 바로 math 라이브러리 안에 들어있는데요, 이것을 사용하기 위해서는 먼저 math 라이브러리를 불러와야 합니다. </p>
+    <pre id="a1a5f0db-e510-41d8-a2b9-9eda46fd8302" class="code"><code>import math</code></pre>
+    <p id="ce3ced0c-b0a0-498f-bc16-9f198b0f8221" class="">그리고 나면, math.sqrt( ) 의 형식으로 함수를 사용할 수 있게 됩니다. 만약 2의 제곱근(=1.414)를 구하고 싶다면 다음과 같이 코드를 작성합니다.</p>
+    <pre id="8c258398-c1b3-4306-aa0b-539c94a608a1" class="code"><code>import math
+a=math.sqrt(2)
+print('Square root of 2 = {}'.format(a))</code></pre>
+    <p id="5e14d8e1-70aa-4ed8-bf3b-558b3b3da320" class=""></p>
+    <p id="3b7d8f5f-d4b5-4224-acaf-01e0c51d636d" class="">하지만 math 라이브러리를 import 하지 않고도 구할 수 있는 방법이 있습니다. 앞서 배운 pow( ) 함수를 이용하는 것인데요, 2 제곱근은 0.5 제곱과 같다는 점을 이용하는 것입니다. </p>
+    <figure id="396661a1-e33b-455f-b81e-9cda77f1f4ac" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msqrt><mi>x</mi></msqrt><mo>=</mo><msup><mi>x</mi><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow></msup><mo>=</mo><msup><mi>x</mi><mn>0.5</mn></msup></mrow><annotation encoding="application/x-tex">\sqrt{x}=x^{1/2}=x^{0.5}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.190845em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8491550000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathdefault">x</span></span></span><span style="top:-2.809155em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,
+-10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8,
+-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10s173,378,173,378c0.7,0,
+35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429c69,-144,104.5,-217.7,106.5,
+-221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
+s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
+s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.190845em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.938em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">/</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span><span class="mord mtight">.</span><span class="mord mtight">5</span></span></span></span></span></span></span></span></span></span></span></span></span></div></figure>
+    <p id="59c729cc-f60d-42a3-a196-c34a9df5c4fe" class="">그러면, pow( ) 함수를 이용해서 2의 제곱근을 구해봅시다. </p>
+
+    <pre id="7890f0cc-1b91-40f3-a292-3629c5c8031d" class="code"><code>b=pow(2,0.5)
+print('2 ^ 0.5 = {}'.format(b))</code></pre>
+    <p id="cb916c7e-8246-4eef-b37a-eccf71acae20" class="">pow( )함수를 이용해서 계산된 제곱근은 math 라이브러리의 math.sqrt( )함수로부터 얻은 값과 동일함을 알 수 있습니다.</p>
+
+    <p id="bc94e94b-5b40-4f31-8b09-6493e8456ae6" class=""></p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:200px">
+
+                <div class="column bg-gray-500 px-2 py-2">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-2-5', 'output-1-2-5', 'mycanvas-1-2-5')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-2-5" style="width:100%;height:200px;border:1;overflow:visible;text-overflow:ellipsis;">
+import math
+a=math.sqrt(2)
+print('Square root of 2 = {}'.format(a))
+b = pow(2, 0.5)
+print('2 ^ 0.5 = {}'.format(b))
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-2-5" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-2-5"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    <hr/>
+    <h3 id="7c07573c-e659-42d3-9dd3-03bfc70264bc" class="">2차원 공간의 L2 거리</h3>
+    <p id="b8662818-69da-4ddd-90b8-cc1543013e62" class="">제곱과 제곱근을 구하는 방법을 모두 알아보았기 때문에, 이제 우리는 (수식 2-3)의 L2거리 계산식을 구현할 수 있습니다. 점 A(4,1)과 B(1,3) 사이의 L2 거리를 한번 구해볼까요?</p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:200px">
+
+                <div class="column bg-gray-500 px-2 py-2">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-2-6', 'output-1-2-6', 'mycanvas-1-2-6')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-2-6" style="width:100%;height:200px;border:1;overflow:visible;text-overflow:ellipsis;">
+A=[4,1]
+B=[1,3]
+c=(A[0]-B[0])*(A[0]-B[0])+(A[1]-B[1])*(A[1]-B[1])
+c=pow(c,0.5)
+print('The L2 distance between A(4,1) and B(1,3) = {}'.format(c))
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-2-6" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-2-6"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <p id="175db093-1ca7-4cc6-9575-73d7c845d4c9" class="">
+</p>
+
+</div></div></div>
+
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="870c83d6-b59c-4cf3-ae5b-291cc12da271" class="">3차원 공간에서의 거리</h2>
+    <hr id="968b66d7-fd01-4f94-b6fb-7219f9213d16"/>
+    <p id="ce8276d6-5085-4e0a-ac6b-7c33da91f225" class="">그렇다면 점 A(2, 1, 4) 와 B(1, 0, 2) 간의 거리를 구할 수 있을까요? 네, 물론입니다. 맨해튼 거리(L1), L2거리 모두 구할 수 있습니다. </p><h3 id="5df822b6-b90f-4cd8-841f-548e1dd51833" class="">3차원 맨해튼 거리</h3><p id="986949a1-e07f-42dc-a305-b156d356e62f" class="">2차원과 마찬가지로 </p><figure id="2577493e-d760-4039-8cf3-af928265522c" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi mathvariant="normal">부</mi><mi mathvariant="normal">터</mi><mtext> </mtext><mi>B</mi><mi mathvariant="normal">까</mi><mi mathvariant="normal">지</mi><mi mathvariant="normal">의</mi><mtext> </mtext><mi mathvariant="normal">거</mi><mi mathvariant="normal">리</mi><mo>=</mo><mi mathvariant="normal">∣</mi><mn>2</mn><mo>−</mo><mn>1</mn><mi mathvariant="normal">∣</mi><mo>+</mo><mi mathvariant="normal">∣</mi><mn>1</mn><mo>−</mo><mn>0</mn><mi mathvariant="normal">∣</mi><mo>+</mo><mi mathvariant="normal">∣</mi><mn>4</mn><mo>−</mo><mn>2</mn><mi mathvariant="normal">∣</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">A부터~ B까지의 ~거리 = |2-1|+|1-0|+|4-2|=4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord hangul_fallback">부</span><span class="mord hangul_fallback">터</span><span class="mspace nobreak"> </span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord hangul_fallback">까</span><span class="mord hangul_fallback">지</span><span class="mord hangul_fallback">의</span><span class="mspace nobreak"> </span><span class="mord hangul_fallback">거</span><span class="mord hangul_fallback">리</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span></span></div></figure><p id="aeee6dba-8359-4264-9ef8-34b3c3fac3ee" class="">와 같이 맨해튼 거리를 구할 수 있습니다.</p><p id="06a63e4e-1933-4216-967f-2c6699ebf1b7" class="">
+</p>
+    <hr/>
+    <h3 id="9f8aab8e-a341-422b-ad8d-42bcd22adc81" class="">3차원 L2 거리</h3><p id="9bb0f50a-e6ec-4f53-83f3-0ed6344bf802" class="">L2 거리 역시 3차원 상의 피타고라스 정리를 이용해서 구할 수 있습니다. </p><figure id="aa03da1b-195f-4119-bcc3-5f50e6272a22" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">거</mi><mi mathvariant="normal">리</mi><mo>=</mo><msqrt><mrow><msup><mn>1</mn><mn>2</mn></msup><mo>+</mo><msup><mn>1</mn><mn>2</mn></msup><mo>+</mo><msup><mn>2</mn><mn>2</mn></msup></mrow></msqrt><mo>=</mo><msqrt><mn>6</mn></msqrt></mrow><annotation encoding="application/x-tex">거리 = \sqrt{1^2+1^2+2^2}=\sqrt{6}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord hangul_fallback">거</span><span class="mord hangul_fallback">리</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.2399999999999998em;vertical-align:-0.177736em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0622639999999999em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.0222640000000003em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg width='400em' height='1.28em' viewBox='0 0 400000 1296' preserveAspectRatio='xMinYMin slice'><path d='M263,681c0.7,0,18,39.7,52,119c34,79.3,68.167,
+158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120c340,-704.7,510.7,-1060.3,512,-1067
+c4.7,-7.3,11,-11,19,-11H40000v40H1012.3s-271.3,567,-271.3,567c-38.7,80.7,-84,
+175,-136,283c-52,108,-89.167,185.3,-111.5,232c-22.3,46.7,-33.8,70.3,-34.5,71
+c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1s-109,-253,-109,-253c-72.7,-168,-109.3,
+-252,-110,-252c-10.7,8,-22,16.7,-34,26c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26
+s76,-59,76,-59s76,-60,76,-60z M1001 80H40000v40H1012z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.177736em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.08390500000000001em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.956095em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">6</span></span></span><span style="top:-2.916095em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,
+-10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8,
+-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10s173,378,173,378c0.7,0,
+35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429c69,-144,104.5,-217.7,106.5,
+-221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
+s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
+s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.08390500000000001em;"><span></span></span></span></span></span></span></span></span></span></div></figure><p id="d3c4d2ff-cb9b-4511-afb3-2fee57d7d3b9" class=""><code>Quiz 2-3</code> 점 A(1, 0, 1)과 B(0, 2, 0) 간의 맨해튼 거리와 L2거리를 구하여라.</p><pre id="873b3d1f-8819-4911-afd7-885f040c228f" class="code"><code>정답 : 맨해튼 거리=4, L2거리=sqrt(6)
+해설 : 맨해튼 거리=|1-0|+|0-2|+|1-0|=4, L2거리=sqrt(1^2+2^2+1^2)=sqrt(6)</code></pre><p id="3b68f271-ee18-48b4-9ba2-99a0fad364cf" class="">
+</p>
+</div></div></div>
+
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="870c83d6-b59c-4cf3-ae5b-291cc12da272" class="">파이썬으로 구현하는 3차원 공간에서의 거리</h2>
+    <hr id="968b66d7-fd01-4f94-b6fb-7219f9213d17"/>
+
+    <h3 id="ca80b934-356c-47e4-aaed-1a386e4ec45d" class="">연속된 숫자 생성하기</h3>
+    <p id="d24e2a7e-aec7-4dcc-8a97-12abc4b2cc57" class="">파이썬에서 연속된 숫자를 생성하는 일은 매우 빈번하게 사용됩니다. 그렇다면 어떻게 연속된 숫자를 만들어 낼 수 있을까요? 파이썬에서는 range( )라는 함수를 사용합니다. </p>
+    <p id="f3492d64-d8cd-496d-8538-34e9681e026e" class="">range(N)이라고 쓰면, 0에서부터 N-1까지의 연속된 숫자를 생성해 줍니다. 만약 숫자 0, 1, 2를 만들고 싶다면, range(3) 이라고 적으면 됩니다. 그러면 range( )를 이용하여 숫자 0, 1, 2 를 만들고, A라는 리스트에 저장해 보도록 하겠습니다. </p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:100px">
+
+                <div class="column bg-gray-500 px-2 py-2">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-2-7', 'output-1-2-7', 'mycanvas-1-2-7')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-2-7" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+c=range(3)
+A=list(c)
+print(A)
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-2-7" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-2-7"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <p id="ceda6aa9-8b8f-4222-ba16-11904f6ef016" class=""></p>
+    <hr/>
+
+    <h3 id="5917e4ca-7620-4b35-b776-2f5cb15eb6c1" class="">반복하기</h3>
+    <p id="4ebdd9dd-6a37-4ebb-8292-5a4029035518" class="">차원이 늘어날수록 절대값이나 제곱을 반복적으로 계산해야 거리를 구할 수 있습니다. 가령 점 A(2, 1, 4) 와 B(1, 0, 2) 간의 맨해튼 거리는 아래의 코드처럼 구할 수 있습니다. </p>
+
+    <div class="card shadow mb-4 mx-2">
+          <div class="card-body shadow ">
+            <div class="column"><form>
+              <div class="form-group row" style="height:100px">
+
+                <div class="column bg-gray-500 px-2 py-2">
+                  <a href="javascript:void(0);" onclick="runit('yourcode-1-2-8', 'output-1-2-8', 'mycanvas-1-2-8')" class="btn btn-primary btn-sm btn-circle">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </div>
+                <div class="column col-sm-0 " style="width:90%">
+                    <textarea id="yourcode-1-2-8" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+A=[2,1,4]
+B=[1,0,2]
+c=abs(A[0]-B[0])+abs(A[1]-B[1])+abs(A[2]-B[2])
+print('Manhattan distance between A(2,1,4) and B(1,0,2) = {}'.format(c))
+                    </textarea>
+                </div>
+              </div></form>
+              <hr/>
+              <div class="row">
+                <pre id="output-1-2-8" ></pre>
+                <!-- If you want turtle graphics include a canvas -->
+                <div id="mycanvas-1-2-8"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    <p id="12d1956f-1eb9-4c72-806a-489fd4ef739f" class=""></p>
+    <p id="b38ef96e-b776-4f73-aaa1-b661274c0c51" class="">하지만, 절대값을 abs(A[i]-B[i]) 와 같이 반복적으로 구한 후 더하게 됩니다. 3차원까지는 손으로 적을 수 있겠지만, 10차원, 100차원이 된다면 손으로 일일이 적는 것은 매우 불편할 것입니다. 따라서 파이썬에서는 단순 반복 구문을 효율적으로 처리하는 <strong>for 명령어</strong>가 존재합니다. </p>
+    <p id="b58c2da7-38ea-47e1-9999-f0afc3c6f545" class="">단순 반복할 일의 횟수를 N 이라고 하면, </p>
+
+    <pre id="f5ac2419-0c36-4098-97b8-acb37503481f" class="code"><code>for i in range(N):
+    단순반복할 일 1
+    단순반복할 일 2</code></pre>
+
+    <p id="081aff42-03f0-4428-a0ae-a32e9ed90d0c" class="">이런 식으로 적어주면 지정한 횟수 N만큼 일을 반복해 줍니다. 여기서 주의할 사항은</p>
+    <p id="176f1506-511a-4312-a19b-f80f1ab70139" class="">(1) for 문의 맨 끝에는 반드시 콜론(:)을 붙인다.</p>
+    <p id="39eb4acd-ee60-4824-b860-b091a2e0680e" class="">(2) 단순반복할 일들은 반드시 <strong>들여쓰기</strong><em>indent</em>를 해준다. (일반적으로 2칸 혹은 4칸 들여쓰기를 사용합니다.)</p><p id="9a02ecd5-1671-4680-b6d8-4d983e5a4f38" class=""></p>
+    <p id="07113e73-7fc2-497e-b943-8eb683d3bd83" class="">그러면 for 문을 이용한 몇가지 예제를 살펴보도록 하겠습니다. </p>
+    <ul id="6fb67bb8-64d3-40ce-a40f-b5816ba88aef" class="bulleted-list">
+        <li>&#x27;안녕, 파이썬&#x27;을 3번 반복해서 출력하는 프로그램을 만들기
+            <p id="2643b41b-4875-4b39-b300-397ac61e2790" class="">3번 반복해서 출력을 해야 하므로 range(3)을 이용합니다.</p>
+
+            <div class="card shadow mb-4 mx-2">
+              <div class="card-body shadow ">
+                <div class="column"><form>
+                  <div class="form-group row" style="height:100px">
+
+                    <div class="column bg-gray-500 px-2 py-2">
+                      <a href="javascript:void(0);" onclick="runit('yourcode-1-2-9', 'output-1-2-9', 'mycanvas-1-2-9')" class="btn btn-primary btn-sm btn-circle">
+                        <i class="fas fa-forward"></i>
+                      </a>
+                    </div>
+                    <div class="column col-sm-0 " style="width:90%">
+                        <textarea id="yourcode-1-2-9" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+for i in range(3):
+    print('Hi, Python!')
+                        </textarea>
+                    </div>
+                  </div></form>
+                  <hr/>
+                  <div class="row">
+                    <pre id="output-1-2-9" ></pre>
+                    <!-- If you want turtle graphics include a canvas -->
+                    <div id="mycanvas-1-2-9"></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        </li>
+    </ul>
+    <p id="6f80276e-7be0-4f1d-931a-3b7ac6e57bfa" class=""></p>
+    <ul id="b1418500-f81b-4dac-9688-f2bb29b2748c" class="bulleted-list">
+        <li>&#x27;안녕, 파이썬&#x27;을 5번 반복해서 출력한 후, &#x27;나도 반가워&#x27;를 출력하는 프로그램 만들기
+            <p id="6f399d4d-415f-4031-87b7-1b55926a6dc0" class="">&#x27;안녕, 파이썬&#x27;은 5번 반복하지만, &#x27;나도 반가워&#x27;는 1번만 출력되어야 합니다. 따라서, range(5)를 활용하되, &#x27;나도 반가워&#x27;는 그 영향에 미치지 않아야 합니다. 여기서 영향에 미치지 않는다는 것의 의미는 들여쓰기를 하지 않는다는 것을 의미합니다. </p>
+
+            <div class="card shadow mb-4 mx-2">
+              <div class="card-body shadow ">
+                <div class="column"><form>
+                  <div class="form-group row" style="height:100px">
+
+                    <div class="column bg-gray-500 px-2 py-2">
+                      <a href="javascript:void(0);" onclick="runit('yourcode-1-2-10', 'output-1-2-10', 'mycanvas-1-2-10')" class="btn btn-primary btn-sm btn-circle">
+                        <i class="fas fa-forward"></i>
+                      </a>
+                    </div>
+                    <div class="column col-sm-0 " style="width:90%">
+                        <textarea id="yourcode-1-2-10" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+for i in range(5):
+	print('Hi, Python!')
+print('Nice to meet you, too!!')
+                        </textarea>
+                    </div>
+                  </div></form>
+                  <hr/>
+                  <div class="row">
+                    <pre id="output-1-2-10" ></pre>
+                    <!-- If you want turtle graphics include a canvas -->
+                    <div id="mycanvas-1-2-10"></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        </li>
+    </ul>
+    <p id="30fb5610-4cba-4078-b0b1-256e51d45ee2" class=""></p>
+
+    <ul id="1c07014c-d766-41f4-bc04-acd67481b481" class="bulleted-list"><li>반복 횟수 출력하기 : &#x27;안녕, 파이썬 1&#x27;, &#x27;안녕, 파이썬 2&#x27;, &#x27;안녕, 파이썬 3&#x27;을 출력하는 프로그램 만들기
+        <p id="b7009361-5a45-4168-a895-029c183fa665" class="">이전과 같이 반복해서 문장 출력을 수행하되 규칙적으로 변하는 숫자가 함께 출력된다는 점이 다릅니다. 사실 for 문 안에 i 라는 변수에는 range에서 만들어진 연속된 숫자가 들어갑니다. 가령 range(3) 이라는 for 문에 있어서 i 는 첫 실행에서는 0, 그 다음 실행에서는 1, 마지막 실행에서는 2가 대입되어 들어갑니다. 글로 표현하려니 어렵지만, 바로 다음 예제코드를 보시면 쉽게 이해가 가실 겁니다. </p>
+
+        <div class="card shadow mb-4 mx-2">
+              <div class="card-body shadow ">
+                <div class="column"><form>
+                  <div class="form-group row" style="height:100px">
+
+                    <div class="column bg-gray-500 px-2 py-2">
+                      <a href="javascript:void(0);" onclick="runit('yourcode-1-2-11', 'output-1-2-11', 'mycanvas-1-2-11')" class="btn btn-primary btn-sm btn-circle">
+                        <i class="fas fa-forward"></i>
+                      </a>
+                    </div>
+                    <div class="column col-sm-0 " style="width:90%">
+                        <textarea id="yourcode-1-2-11" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+for i in range(3):
+	print('Hi, Python! {}'.format(i))
+                        </textarea>
+                    </div>
+                  </div></form>
+                  <hr/>
+                  <div class="row">
+                    <pre id="output-1-2-11" ></pre>
+                    <!-- If you want turtle graphics include a canvas -->
+                    <div id="mycanvas-1-2-11"></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        </li>
+    </ul>
+
+    <p id="003b36a3-8c34-4263-99ff-e4aee7b60f5d" class=""></p>
+    <ul id="9795dace-5cb8-48c1-abdd-64e8ce980a30" class="bulleted-list">
+        <li>리스트 내에 있는 아이템을 하나씩 출력하기
+            <p id="27bb0ce8-3018-4080-9021-54cff87903a9" class="">food=[&#x27;Chicken&#x27;,&#x27;Pasta&#x27;,&#x27;Pizza&#x27;,&#x27;Burger&#x27;] 라는 리스트를 만들고, print( ) 함수로 출력하면 모든 리스트 내 아이템이 한꺼번에 출력이 됩니다. </p>
+
+            <div class="card shadow mb-4 mx-2">
+              <div class="card-body shadow ">
+                <div class="column"><form>
+                  <div class="form-group row" style="height:100px">
+
+                    <div class="column bg-gray-500 px-2 py-2">
+                      <a href="javascript:void(0);" onclick="runit('yourcode-1-2-12', 'output-1-2-12', 'mycanvas-1-2-12')" class="btn btn-primary btn-sm btn-circle">
+                        <i class="fas fa-forward"></i>
+                      </a>
+                    </div>
+                    <div class="column col-sm-0 " style="width:90%">
+                        <textarea id="yourcode-1-2-12" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+food=['Chicken','Pasta','Pizza','Burger']
+print(food)
+                        </textarea>
+                    </div>
+                  </div></form>
+                  <hr/>
+                  <div class="row">
+                    <pre id="output-1-2-12" ></pre>
+                    <!-- If you want turtle graphics include a canvas -->
+                    <div id="mycanvas-1-2-12"></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        <p id="bae8b7a6-ce22-450a-8020-87b4ae09d2e5" class="">하지만 for 문을 이용하면, 각 아이템을 하나씩(반복적으로 꺼내어) 출력이 가능합니다. 4개의 아이템을 꺼내어야 하므로, range(4) 를 사용합니다. 첫번째 반복시에는 i=0 이 되고, 따라서 print(food[0]) 함수가 실행됩니다. 즉, 첫번째 food 리스트 내 아이템이 출력됩니다. (리스트의 첫번째 항목을 가리키는 것은 1 이 아닌 0 이라고 배웠었습니다.)</p>
+        <p id="bcdfb5dd-51ab-4410-88f8-5ee0b0e2c574" class="">다음 반복시에는 print(food[1]), 그 다음에는 print(food[2]), 그리고 마지막으로 print(food[3])을 출력하게 됩니다. </p>
+
+        <div class="card shadow mb-4 mx-2">
+              <div class="card-body shadow ">
+                <div class="column"><form>
+                  <div class="form-group row" style="height:100px">
+
+                    <div class="column bg-gray-500 px-2 py-2">
+                      <a href="javascript:void(0);" onclick="runit('yourcode-1-2-13', 'output-1-2-13', 'mycanvas-1-2-13')" class="btn btn-primary btn-sm btn-circle">
+                        <i class="fas fa-forward"></i>
+                      </a>
+                    </div>
+                    <div class="column col-sm-0 " style="width:90%">
+                        <textarea id="yourcode-1-2-13" style="width:100%;height:100px;border:1;overflow:visible;text-overflow:ellipsis;">
+food=['Chicken','Pasta','Pizza','Burger']
+for i in range(4):
+	print(food[i])
+                        </textarea>
+                    </div>
+                  </div></form>
+                  <hr/>
+                  <div class="row">
+                    <pre id="output-1-2-13" ></pre>
+                    <!-- If you want turtle graphics include a canvas -->
+                    <div id="mycanvas-1-2-13"></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        </li>
+    </ul><p id="65d803e9-26dc-4077-8161-7f0619393487" class=""></p>
+
+    <p id="69bba46f-b789-45dd-ae2a-8a33f5cd6c4f" class=""></p>
+
+    <hr/>
+    <h3 id="dff7d7e6-9f7d-46fa-bd9d-35a12803ab46" class="">for 문과 range( )를 활용한 3차원 거리 구하기</h3>
+    <p id="768f1b5e-6235-49da-9500-b8f240bb52ca" class="">다시 처음으로 돌아가서, 점 A(2, 1, 4) 와 B(1, 0, 2) 간의 맨해튼 거리를 구해봅시다. 여기서는 3번의 절대값을 구해야 하므로 range(3) 을 사용하게 됩니다. </p>
+
+    <div class="card shadow mb-4 mx-2">
+              <div class="card-body shadow ">
+                <div class="column"><form>
+                  <div class="form-group row" style="height:200px">
+
+                    <div class="column bg-gray-500 px-2 py-2">
+                      <a href="javascript:void(0);" onclick="runit('yourcode-1-2-14', 'output-1-2-14', 'mycanvas-1-2-14')" class="btn btn-primary btn-sm btn-circle">
+                        <i class="fas fa-forward"></i>
+                      </a>
+                    </div>
+                    <div class="column col-sm-0 " style="width:90%">
+                        <textarea id="yourcode-1-2-14" style="width:100%;height:200px;border:1;overflow:visible;text-overflow:ellipsis;">
+A=[2,1,4]
+B=[1,0,2]
+c=0
+for i in range(3):
+	c=c+abs(A[i]-B[i])
+print('Manhattan distance between A(2,1,4) and B(1,0,2) = {}'.format(c))
+                        </textarea>
+                    </div>
+                  </div></form>
+                  <hr/>
+                  <div class="row">
+                    <pre id="output-1-2-14" ></pre>
+                    <!-- If you want turtle graphics include a canvas -->
+                    <div id="mycanvas-1-2-14"></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+    <p id="884d8265-29b3-4319-bd56-c546bfdc253b" class="">3차원 공간의 거리를 구하는 예에서는 for 반복문을 사용하는게 더 복잡해 보일 수도 있습니다. 하지만, 10차원 아니 100차원의 공간에서의 거리를 구한다고 하면, for 반복문이 주는 편리함은 이루 말할  수 없게 됩니다. </p>
+    <p id="d52dcfe1-209f-4fbe-a874-46d947c4dbbe" class=""></p>
+</div></div></div>
+
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="870c83d6-b59c-4cf3-ae5b-291cc12da273" class="">10차원 거리 구하기</h2>
+    <hr id="968b66d7-fd01-4f94-b6fb-7219f9213d18"/>
+
+    <h3 id="0caf4f22-c6a6-4530-be5f-c332a5db2ab7" class="">10차원 벡터의 맨해튼 거리</h3>
+    <p id="c76e439b-499b-41c8-9c6a-72e6871bc057" class="">이제 여러분은 2차원 공간에서의 두 점 사이의 거리와 3차원 및 10차원 공간에서의 거리를 모두 배웠습니다. 그러면 N차원 공간에서의 두 점 사이의 거리도 구할 수 있을까요? 네. 구할 수 있을 겁니다. 위에서 구한 for 문의 range( ) 함수 안의 인자에 N이라는 값을 넣어주기만 하면 됩니다. 자 그러면 다음 10차원 공간에서의 두 점의 거리를 구해봅시다. </p>
+    <figure id="b361aa06-7092-4e8d-8a6a-1d60ae51b0ea" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">점</mi><mi>A</mi><mo>(</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">점 A(0, 1, 1, 0, 0, 0, 1, 0, 1, 1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord hangul_fallback">점</span><span class="mord mathdefault">A</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span></div></figure><figure id="a3cbaa05-1988-41aa-b7bc-374e03a5437d" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">점</mi><mi>B</mi><mo>(</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">점 B(0, 1, 1, 1, 1, 0, 1, 0, 1, 1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord hangul_fallback">점</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span></div></figure>
+
+    <div class="card shadow mb-4 mx-2">
+              <div class="card-body shadow ">
+                <div class="column"><form>
+                  <div class="form-group row" style="height:300px">
+
+                    <div class="column bg-gray-500 px-2 py-2">
+                      <a href="javascript:void(0);" onclick="runit('yourcode-1-2-15', 'output-1-2-15', 'mycanvas-1-2-15')" class="btn btn-primary btn-sm btn-circle">
+                        <i class="fas fa-forward"></i>
+                      </a>
+                    </div>
+                    <div class="column col-sm-0 " style="width:90%">
+                        <textarea id="yourcode-1-2-15" style="width:100%;height:300px;border:1;overflow:visible;text-overflow:ellipsis;">
+# 점 A(0, 1, 1, 0, 0, 0, 1, 0, 1, 1)
+A=[0, 1, 1, 0, 0, 0, 1, 0, 1, 1]
+# 점 B(0, 1, 1, 1, 1, 0, 1, 0, 1, 1)
+B=[0, 1, 1, 1, 1, 0, 1, 0, 1, 1]
+
+# L1 구하기
+L1=0
+for i in range(10):
+	L1=L1+abs(A[i]-B[i])
+
+print('L1 distance = {}'.format(L1))
+                        </textarea>
+                    </div>
+                  </div></form>
+                  <hr/>
+                  <div class="row">
+                    <pre id="output-1-2-15" ></pre>
+                    <!-- If you want turtle graphics include a canvas -->
+                    <div id="mycanvas-1-2-15"></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+
+    <p id="f49ee4a8-23ee-467f-bcb2-5c794ebed132" class="">점 A와 점 B 사이의 맨해튼 거리는 2 네요. </p>
+
+    <p id="97589f32-4872-4b46-a688-857ebb839ffd" class=""></p>
+
+    <hr/>
+    <h3 id="b304769e-299a-4974-ad9c-5eb5fae9473a" class="">10차원 L2 거리</h3>
+    <p id="3b2631de-8f2b-47c7-9e45-b5e777e4beaa" class="">그러면 이제 L2 거리를 구해봅시다. </p>
+
+    <div class="card shadow mb-4 mx-2">
+              <div class="card-body shadow ">
+                <div class="column"><form>
+                  <div class="form-group row" style="height:330px">
+
+                    <div class="column bg-gray-500 px-2 py-2">
+                      <a href="javascript:void(0);" onclick="runit('yourcode-1-2-16', 'output-1-2-16', 'mycanvas-1-2-16')" class="btn btn-primary btn-sm btn-circle">
+                        <i class="fas fa-forward"></i>
+                      </a>
+                    </div>
+                    <div class="column col-sm-0 " style="width:90%">
+                        <textarea id="yourcode-1-2-16" style="width:100%;height:330px;border:1;overflow:visible;text-overflow:ellipsis;">
+# 점 A(0, 1, 1, 0, 0, 0, 1, 0, 1, 1)
+A=[0, 1, 1, 0, 0, 0, 1, 0, 1, 1]
+# 점 B(0, 1, 1, 1, 1, 0, 1, 0, 1, 1)
+B=[0, 1, 1, 1, 1, 0, 1, 0, 1, 1]
+
+# L2 구하기
+import math
+L2=0
+for i in range(10):
+	L2=L2+(A[i]-B[i])*(A[i]-B[i])
+L2=math.sqrt(L2)
+
+print('L2 distance = {}'.format(L2))
+                        </textarea>
+                    </div>
+                  </div></form>
+                  <hr/>
+                  <div class="row">
+                    <pre id="output-1-2-16" ></pre>
+                    <!-- If you want turtle graphics include a canvas -->
+                    <div id="mycanvas-1-2-16"></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+    <p id="e3712d81-99c3-4b63-ac7d-57a12e5307df" class="">10차원 공간상의 두 점 A와 B 사이의 L2거리는 1.414 네요. </p>
+    <p id="1e8cdd40-1c2b-4efe-a067-ef83bcd6ee4b" class=""></p>
+</div></div></div>
+
+
+<h1 id="08fb39bf-9885-4704-b442-d9accc664443" class="">미니프로젝트 2) 나와 독서 취향이 비슷한 사람은?</h1>
+<hr/>
+<p id="e0eb6c88-3ecd-46f5-a90d-15aa83f84af9" class="">지금까지 여러분은 공간상의 두 점의 거리를 구하는 방법을 배워왔습니다. 이 방법은 사용자간의 취향의 멀고 가까움을 계산하는 방식으로 활용될 것입니다. </p>
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="08fb39bf-9885-4704-b442-d9accc664444" class="">해결방법의 단계적 분석</h2>
+    <hr id="eaab4944-0adf-4ba8-8d2c-257342a9b312"/>
+
+    <p id="530e9e71-3a65-45bc-bac8-e3193eadaa28" class="">이제 나와 독서 취향이 비슷한 다른 사용자를 찾아보려 합니다. 어떤 사용자가 어떤 책을 읽었는지를 알면 그 사용자의 독서 취향을 알 수 있습니다. 앞 장의 미니 프로젝트 1에서 여러분들이 읽은 책은 &#x27;Romance of Three Kingdoms&#x27;, &#x27;Sapiens&#x27;, &#x27;The Way to Agile&#x27;, &#x27;Homo Deus&#x27;, &#x27;The Powerful&#x27; 이었습니다. 그리고, 그 정보를 mylist에 저장했죠.</p>
+
+    <pre id="ac284f35-8930-47b6-aef5-723dcbebd896" class="code"><code>books=[&#x27;The Cosmos&#x27;,&#x27;Romance of Three Kingdoms&#x27;,&#x27;Sapiens&#x27;,&#x27;Little Prince&#x27;,&#x27;Gone with the Wind&#x27;,&#x27;Gun, Germ, and Steel&#x27;,&#x27;The Way to Agile&#x27;,&#x27;What is the Leardership?&#x27;,&#x27;Homo Deus&#x27;,&#x27;The Powerful&#x27;]
+mylist=[0, 1, 1, 0, 0, 0, 1, 0, 1, 1]</code></pre>
+
+    <p id="ce5c6445-99f3-4315-8ac0-9e33b1abbf05" class=""></p>
+    <p id="7c96efd5-675e-47a1-b6bb-e40573cb64a0" class="">이번에는 다른 사용자가 어떤 책을 읽었는지 저장해 놓은 새로운 리스트를 생각해 봅시다. 2명의 사용자 A, B 는 각각 다음과 같은 책을 읽었습니다.</p>
+    <p id="1e9a7494-46ba-442c-a5b0-cff2f88702e7" class=""></p>
+    <ul id="f319fee9-29eb-4409-b571-4a21424cedc4" class="bulleted-list">
+        <li>user A : &#x27;Romance of Three Kingdoms&#x27;, &#x27;Sapiens&#x27;, &#x27;Gun, Germ, and Steel&#x27;, &#x27;The Way to Agile&#x27;, &#x27;Homo Deus&#x27;, &#x27;The Powerful&#x27;</li></ul>
+    <ul id="5643a46b-0777-4280-b82e-5925e5108a19" class="bulleted-list">
+        <li>user B : &#x27;The Cosmos&#x27;, &#x27;Little Prince&#x27;, &#x27;Gone with the Wind&#x27;, &#x27;Gun, Germ, and Steel&#x27;, &#x27;What is the Leardership?&#x27;</li></ul>
+    <p id="ad78985c-4abd-42ce-a7e7-df2a46a5bb98" class=""></p>
+
+    <p id="a2a7950c-6503-4d43-ab00-cea7842d7955" class="">그러면 user A와 user B도 각자 읽은 책 리스트를 만들어 봅시다.</p>
+    <pre id="b70c671c-8f52-4d5d-ad03-43a4d08152ec" class="code"><code>userAlist=[0, 1, 1, 0, 0, 1, 1, 0, 1, 1]
+userBlist=[1, 0, 0, 1, 1, 1, 0, 1, 0, 0]</code></pre>
+
+    <p id="931b9641-f3f1-464e-9c80-b54cac86e1a2" class=""></p>
+    <p id="e705c299-7027-44b2-bf7b-3d2da03853cc" class="">과연, 여러분의 독서 취향은 사용자 A 와 사용자 B 중 누구와 더 비슷할까요? 아마도 사용자 A 일 것입니다. 사용자 A는 여러분이 읽은 책을 모두 읽고 &#x27;Gun, Germ, and Steel&#x27; 라는 책도 더 읽었습니다. 반면 사용자 B가 읽은 책은 여러분의 읽은 책과 겹치는 것이 하나도 없습니다. </p>
+    <p id="1d657827-1c68-4a46-a1b3-141def9741f5" class="">그러면 정량적으로 얼마나 더 비슷한지 표현할 수 있을까요? 네, 물론입니다. 이 때 사용할 수 있는 방법이 &#x27;거리&#x27; 정보입니다. 거리가 가까울 수록 여러분과 독서취향이 비슷한 사람입니다. </p>
+    <p id="1d35ce25-da38-4626-bfe8-e72ddf2d6ac8" class="">mylist와 userAlist의 맨해튼 거리를 구해볼까요? 우리는 이미 위에서 10차원 벡터간의 거리를 구했었습니다. 똑같은 코드를 사용해봅시다. </p>
+
+    <div class="card shadow mb-4 mx-2">
+              <div class="card-body shadow ">
+                <div class="column"><form>
+                  <div class="form-group row" style="height:300px">
+
+                    <div class="column bg-gray-500 px-2 py-2">
+                      <a href="javascript:void(0);" onclick="runit('yourcode-1-2-17', 'output-1-2-17', 'mycanvas-1-2-17')" class="btn btn-primary btn-sm btn-circle">
+                        <i class="fas fa-forward"></i>
+                      </a>
+                    </div>
+                    <div class="column col-sm-0 " style="width:90%">
+                        <textarea id="yourcode-1-2-17" style="width:100%;height:300px;border:1;overflow:visible;text-overflow:ellipsis;">
+mylist=[0, 1, 1, 0, 0, 0, 1, 0, 1, 1]
+userAlist=[0, 1, 1, 0, 0, 1, 1, 0, 1, 1]
+
+# L1 구하기
+L1=0
+for i in range(10):
+	L1=L1+abs(mylist[i]-userAlist[i])
+
+print('L1 distance between you and A = {}'.format(L1))
+                        </textarea>
+                    </div>
+                  </div></form>
+                  <hr/>
+                  <div class="row">
+                    <pre id="output-1-2-17" ></pre>
+                    <!-- If you want turtle graphics include a canvas -->
+                    <div id="mycanvas-1-2-17"></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+    <p id="d008444c-ffd5-42a9-ac52-4dc8620bc2ea" class="">여러분과 취향이 비슷한 사용자 A와의 맨해튼 거리는 1이 나왔습니다. 그렇다면, 여러분과 취향이 완전히 다른 사용자 B의 맨해튼 거리값은 어떻게 될까요? 아래 코드를 입력하고 실행해 봅시다. </p>
+
+    <div class="card shadow mb-4 mx-2">
+              <div class="card-body shadow ">
+                <div class="column"><form>
+                  <div class="form-group row" style="height:300px">
+
+                    <div class="column bg-gray-500 px-2 py-2">
+                      <a href="javascript:void(0);" onclick="runit('yourcode-1-2-18', 'output-1-2-18', 'mycanvas-1-2-18')" class="btn btn-primary btn-sm btn-circle">
+                        <i class="fas fa-forward"></i>
+                      </a>
+                    </div>
+                    <div class="column col-sm-0 " style="width:90%">
+                        <textarea id="yourcode-1-2-18" style="width:100%;height:300px;border:1;overflow:visible;text-overflow:ellipsis;">
+mylist=[0, 1, 1, 0, 0, 0, 1, 0, 1, 1]
+userBlist=[1, 0, 0, 1, 1, 1, 0, 1, 0, 0]
+
+# L1 구하기
+L1=0
+for i in range(10):
+	L1=L1+abs(mylist[i]-userBlist[i])
+
+print('L1 distance between you and B = {}'.format(L1))
+                        </textarea>
+                    </div>
+                  </div></form>
+                  <hr/>
+                  <div class="row">
+                    <pre id="output-1-2-18" ></pre>
+                    <!-- If you want turtle graphics include a canvas -->
+                    <div id="mycanvas-1-2-18"></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+    <p id="e4b3477e-9fda-4065-8425-c82fdfddd285" class=""></p>
+    <p id="a88ececd-1b02-4e7c-ae63-f2c6afc846da" class="">취향이 다른 사용자 B와의 맨해튼 거리는 무려 10이라는 큰 숫자가 나왔습니다. 즉, 독서 취향이 비슷할수록 거리가 가깝고, 취향이 다를 수록 거리가 멉니다. 우리는 거리가 가까운지 먼지를 파악하기만 하면 나와 비슷한 독서 취향을 가지고 있는 사용자들을 검색해 낼 수 있습니다. </p>
+</div></div></div>
+
+
+<div class="row"><div class="card shadow mb-4 mx-2"><div class="card-body">
+    <h2 id="08fb39bf-9885-4704-b442-d9accc664446" class="">도전과제) 스스로 해결해 봅시다.</h2>
+    <hr/>
+
+    <p id="252711a5-5aa4-45be-892c-139aa48cb522" class=""></p>
+    <p id="caf0ba90-f0c8-4430-b510-0adda441231e" class=""><code>미니 프로젝트 문제 2-1</code></p>
+    <p id="46606b3c-176a-432b-9872-1bff22f912fa" class="">이번에는 여러분과 사용자 A, 사용자 B의 L2거리를 구하기 위한 다음의 코드를 완성하세요. userAL2와 userBL2를 계산하는 코드만 작성하시면 됩니다. </p>
+
+    <div class="card shadow mb-4 mx-2">
+              <div class="card-body shadow ">
+                <div class="column"><form>
+                  <div class="form-group row" style="height:400px">
+
+                    <div class="column bg-gray-500 px-2 py-2">
+                      <a href="javascript:void(0);" onclick="runit('yourcode-1-2-19', 'output-1-2-19', 'mycanvas-1-2-19')" class="btn btn-primary btn-sm btn-circle">
+                        <i class="fas fa-forward"></i>
+                      </a>
+                    </div>
+                    <div class="column col-sm-0 " style="width:90%">
+                        <textarea id="yourcode-1-2-19" style="width:100%;height:400px;border:1;overflow:visible;text-overflow:ellipsis;">
+mylist=[0, 1, 1, 0, 0, 0, 1, 0, 1, 1]
+userAlist=[0, 1, 1, 0, 0, 1, 1, 0, 1, 1]
+userBlist=[1, 0, 0, 1, 1, 1, 0, 1, 0, 0]
+
+# L2 구하기
+userAL2=0
+userBL2=0
+
+#######################################
+#여기서부터 코드를 작성해 보세요.
+
+
+#######################################
+print('L2 distance between you and A = {}'.format(userAL2))
+print('L2 distance between you and B = {}'.format(userBL2))
+                        </textarea>
+                    </div>
+                  </div></form>
+                  <hr/>
+                  <div class="row">
+                    <pre id="output-1-2-19" ></pre>
+                    <!-- If you want turtle graphics include a canvas -->
+                    <div id="mycanvas-1-2-19"></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+<p id="3fa537ed-98c6-4533-9ceb-febe679e0225" class=""></p>
+
+</div></div></div>
+
+    <p id="518a2279-abd9-44a8-8fda-77baebaeee11" class=""></p>
+    <p id="e1b65901-917e-446f-bc01-7e599c1b35e5" class=""></p>
+  </div>
+</article>
+
+        </div>
+
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; 모두의연구소 2019</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/chart-area-demo.js"></script>
+  <script src="js/demo/chart-pie-demo.js"></script>
+
+  <script>includeHtml();</script>
+
+
+</body>
+
+</html>
