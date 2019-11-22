@@ -45,4 +45,4 @@ def echo(thing):
 
 
 
-app.run(port=9999, debug=True)
+app.run(host='192.168.0.13', port=9999, debug=True)
